@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class EmpleadoService {  
   public url : string;
-  public empleadolog : Empleado;  
+  public empleadolog : Empleado;    
   headers = new HttpHeaders().set('Content-Type','application/json');
 
   constructor(private http:HttpClient,private router:Router) { 
@@ -49,15 +49,16 @@ export class EmpleadoService {
     localStorage.setItem("empleadolog",JSON.stringify(this.empleadolog));
     this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
     let expires = new Date;
-    expires.setMinutes(expires.getMinutes()+1000);
-    localStorage.setItem("expires",JSON.stringify(expires));    
-    
+    //expires.setSeconds(expires.getSeconds()+10);
+    expires.setMinutes(expires.getMinutes()+5);
+    localStorage.setItem("expires",JSON.stringify(expires));        
   }
 
   cambiar(){
     localStorage.setItem("empleadolog",null);    
     this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
-    localStorage.removeItem("expires");
+    localStorage.removeItem("expires");    
+    this.router.navigate(['login']);
   }
 
   enviarCorreoEmp(empleado : Empleado):Observable<string>{

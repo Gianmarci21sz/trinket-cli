@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 declare var Swal : any;
-declare var asd : any;
 
 @Component({
   selector: 'app-login',

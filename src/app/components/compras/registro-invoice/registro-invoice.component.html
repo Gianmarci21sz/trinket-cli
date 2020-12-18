@@ -1,1 +1,83 @@
-<p>registro-invoice works!</p>
+<div class="row h-100 justify-content-center align-items-center" *ngIf="!estado">
+    <div class="fa-4x" >
+        <i class="fas fa-spinner fa-spin"></i>    
+    </div>
+</div>
+<div class="col-lg-12 mx-auto" *ngIf="estado">
+    <div class="card">
+        <div class="card-header">
+            <h4 style="color: #EA320B;">Nuevo Invoice</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="nuevoInvoice"  class='row'>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="">ID Compra</label>
+                        <select class="custom-select" formControlName="ord_comp_cab_id" #cpro (change)="compraProveedor(cpro.value)">
+                            <option value="{{com.id_ord_comp_cab}}" *ngFor="let com of listaCompras">
+                                {{com.num_ord_cab}}
+                            </option>
+                        </select>
+                        <small *ngIf="OrdenCompraCabId" class="text-danger">
+                            Campo invalido
+                        </small>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">N° Orden Compra</label>
+                        <input style="color: black;" type="text" disabled [class.is-invalid]="numOrdenCab" class="form-control" placeholder="" formControlName='num_orden_cab' >
+                        <small *ngIf="numOrdenCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div>  
+                    <div class="form-group">
+                        <label for="">Nombre Contacto</label>
+                        <input style="color: black;" type="text" disabled [class.is-invalid]="nomContactCab" class="form-control" placeholder="" formControlName='nom_contact_cab' >
+                        <small *ngIf="nomContactCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">Telefono</label>
+                        <input style="color: black;" type="text" disabled [class.is-invalid]="telefonoContactCab" class="form-control" placeholder="" formControlName='telef_contact_cab' >
+                        <small *ngIf="telefonoContactCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div>                                           
+                </div>   
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="">Country</label>
+                        <input style="color: black;" type="text" disabled [class.is-invalid]="conuntryCab" class="form-control" placeholder="Country" formControlName='country_cab' >
+                        <small *ngIf="conuntryCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">N° Consigned</label>
+                        <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numConsignedCab" class="form-control" placeholder="N° consigned" formControlName='num_consigned_cab' >
+                        <small *ngIf="numConsignedCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">State</label>
+                        <input type="text" [class.is-invalid]="staateCab" class="form-control" placeholder="State Cab" formControlName='state_cab' >
+                        <small *ngIf="staateCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div> 
+                    <div class="form-group">
+                        <label for="">Terms Pay</label>
+                        <input type="text" [class.is-invalid]="termsPayCab" class="form-control" placeholder="Terms Pay Cab" formControlName='terms_pay_cab' >
+                        <small *ngIf="termsPayCab" class="text-danger">
+                            Campo invalido
+                          </small>
+                    </div> 
+                </div> 
+                <button class="btn boton-rojo btn-block ml-1 mr-1" (click)="agregar()">
+                    Aceptar
+                </button>             
+            </form>
+        </div>
+    </div>
+</div>

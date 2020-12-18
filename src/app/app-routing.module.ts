@@ -20,7 +20,6 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { RegistroCompraComponent } from './components/compras/registro-compra/registro-compra.component';
 import { RegistroInvoiceComponent } from './components/compras/registro-invoice/registro-invoice.component';
 import { UpCompraComponent } from './components/compras/up-compra/up-compra.component';
-import { UpInvoiceComponent } from './components/compras/up-invoice/up-invoice.component';
 import { ListaComprasComponent } from './components/compras/lista-compras/lista-compras.component';
 import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-invoice.component';
 import { EditComprasComponent } from './components/compras/edit-compras/edit-compras.component';
@@ -40,8 +39,7 @@ const routes: Routes = [
     { path: 'compras',outlet:'opt', component: ComprasComponent},    
     { path: 'addCompra',outlet:'opt', component: RegistroCompraComponent},  
     { path: 'upCompra',outlet:'opt', component: UpCompraComponent},      
-    { path: 'addInvoice',outlet:'opt', component: RegistroInvoiceComponent},  
-    { path: 'upInvoice',outlet:'opt', component: UpInvoiceComponent},      
+    { path: 'addInvoice',outlet:'opt', component: RegistroInvoiceComponent},           
     { path: 'categoria',outlet:'opt', component: CategoriaComponent},    
     { path: 'addCategoria',outlet:'opt', component: AddCategoriaComponent},    
     { path: 'upCategoria/:id_cat',outlet:'opt', component: UpCategoriaComponent},    

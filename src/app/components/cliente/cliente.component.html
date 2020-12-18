@@ -3,35 +3,30 @@
         <i class="fas fa-spinner fa-spin"></i>    
     </div>
 </div>
-<div class="table-responsive" *ngIf="estado">    
-    <div class="card-header">
-        <i class="fas fa-table"></i>
-        Lista de Clientes
-    </div> 
-    <div class="card-body">
-        <table class="table table-hover table-bordered" width="100%" cellspacing="0" id="tablaCliente">
-            <thead class="thead-dark">
-                <tr>
-                    <th>N°</th>
-                    <th>Nombre</th>
-                    <th>N° Documento</th>
-                    <th>Email</th>
-                    <th>Telefono</th>        
-                    <th>Direccion</th>            
-                    <th>Referencia</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let c of lista;let i = index">
-                    <td>{{i+1}}</td>
-                    <td>{{c.nom_cli}}</td>
-                    <td>{{c.num_doc_cli}}</td>
-                    <td>{{c.email_cli}}</td>
-                    <td>{{c.telefono_cli}}</td> 
-                    <td>{{c.direcc_cli}}</td>
-                    <td>{{c.referencia_cli}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="table-responsive" *ngIf="estado">  
+    <h1><b>LISTA PROVEEDORES</b></h1>   
+    <table class="table table-hover table-bordered" width="100%" cellspacing="0" id="tablaCliente">
+        <thead class="thead-dark">
+            <tr>
+                <th>N°</th>
+                <th>Nombre</th>
+                <th>N° Documento</th>
+                <th>Email</th>
+                <th>Telefono</th>        
+                <th>Direccion</th>            
+                <th>Referencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of lista;let i = index">
+                <td>{{i+1}}</td>
+                <td>{{c.nom_cli}}</td>
+                <td>{{c.num_doc_cli}}</td>
+                <td>{{c.email_cli}}</td>
+                <td>{{c.telefono_cli}}</td> 
+                <td>{{c.direcc_cli}}</td>
+                <td>{{c.referencia_cli}}</td>
+            </tr>
+        </tbody>
+    </table>    
 </div>

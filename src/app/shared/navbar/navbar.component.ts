@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toggleSidebar();
+    
   }
 
   eliminar(id : number){    

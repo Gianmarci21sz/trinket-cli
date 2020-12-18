@@ -18,7 +18,9 @@ export class AppComponent implements OnInit{
   isLoading: boolean;
 
   constructor(private router: Router,public empleadoService:EmpleadoService) {
-    this.empleadoService.expiracion();
+    setInterval(()=>{
+      this.empleadoService.expiracion();      
+    },5000);
     this.empleadoService.verificar();
 
   }
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
   }
 
-  actividad(){
-    this.empleadoService.guardarLocal();
+  actividad(){    
+    this.empleadoService.guardarLocal();    
   }
 }

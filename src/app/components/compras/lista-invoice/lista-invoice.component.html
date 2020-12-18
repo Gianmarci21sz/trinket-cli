@@ -1,1 +1,42 @@
-<p>lista-invoice works!</p>
+<div class="row h-100 justify-content-center align-items-center" *ngIf="!estado">
+    <div class="fa-4x" >
+        <i class="fas fa-spinner fa-spin"></i>    
+    </div>
+</div>
+<div class="table-responsive" *ngIf="estado">
+    <h1><b style="color:red;">LISTA INVOICE</b></h1>
+    <button class="btn btn-outline-primary mb-3" 
+    (click)='this.router.navigateByUrl("menu/(opt:addInvoice)")'>
+    <i class="fa fa-plus-circle " aria-hidden="true"></i>&nbsp;Nuevo Invoice
+    </button>
+    <table class="table table-hover table-bordered table-striped" width="100%" cellspacing="0" id="tablaInvoice">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Compra Id</th>
+                <th>N° consigned</th>
+                <th>N° Orden</th>
+                <th>Fecha</th>
+                <th>Nombre Contacto</th>
+                <th>Telefono</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>Terminos</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let inv of lista">
+                <td>{{inv.id_invoice_cab}}</td>
+                <td>{{inv.ord_comp_cab_id}}</td>
+                <td>{{inv.num_consigned_cab}}</td>
+                <td>{{inv.num_orden_cab}}</td>
+                <td>{{inv.fecha_inv_cab | date : 'dd/MM/yyyy'}} {{inv.fecha_inv_cab | date : 'HH:mm:ss'}}</td>
+                <td>{{inv.nomb_contact_cab}}</td>
+                <td>{{inv.telef_contact_cab}}</td>
+                <td>{{inv.country_cab}}</td>
+                <td>{{inv.state_cab}}</td>
+                <td>{{inv.terms_pay_cab}}</td>                
+            </tr>
+        </tbody>
+    </table>
+</div>
