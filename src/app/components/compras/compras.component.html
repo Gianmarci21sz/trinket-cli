@@ -53,7 +53,7 @@
 
           <form class="form-inline">
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" #texto (keyup)="buscar(texto.value)" type="text" placeholder="Buscar.." aria-label="Search">
+              <input class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}" (keypress)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
             </div>
           </form>
         </div>
@@ -99,12 +99,10 @@
                       <!--<span class="badge badge-pill danger-color">NEW</span>-->
                     </a>
                   </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>S/.{{u.precio_unit_prod}}</strong>
-                </h4>
-                <button class="btn btn-outline-primary btn-block px-3" (click)="agregar(u)">Añadir</button>
+                </h5>    
+                <button type="button" class="btn btn-outline-primary btn-block px-3" data-bs-toggle="modal" 
+                    data-bs-target="#cantPrecio" (click)="agregar(u)" data-bs-whatever="@getbootstrap">
+                        Añadir</button>                            
 
               </div>
               <!--Card content-->
@@ -163,4 +161,32 @@
 
     </div>
   </main>
+  <div class="modal fade" id="cantPrecio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" *ngIf="aProducto" style="color: red;">{{aProducto.nom_prod | uppercase}}</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Precio:</label>
+              <input type="text" (keypress)="soloNumeros($event)" [(ngModel)]="precio" [ngModelOptions]="{standalone: true}" class="form-control" >
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Cantidad:</label>
+              <input type="text" (keypress)="soloNumeros($event)" [(ngModel)]="cantidad" [ngModelOptions]="{standalone: true}" class="form-control">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-success" (click)="anadir()">Añadir</button>
+        </div>
+      </div>
+    </div>
+  </div>
   

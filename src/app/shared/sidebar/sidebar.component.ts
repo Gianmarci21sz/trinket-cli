@@ -11,6 +11,7 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 export class SidebarComponent implements OnInit {
   public uiBasicCollapsed = false;
   public samplePagesCollapsed = false;
+  public invoiceCollapsed = false;
   
   constructor(public router:Router,
               public empleadoService:EmpleadoService,

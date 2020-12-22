@@ -109,6 +109,10 @@ export class AddProductoComponent implements OnInit {
     }
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:producto)');
+  }
+
   llenarProducto(){
     this.producto ={
       id_prod : 0,

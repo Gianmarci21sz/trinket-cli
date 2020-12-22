@@ -30,6 +30,10 @@ export class UpCategoriaComponent implements OnInit {
     return this.nuevaCat.get('descrip_cat').invalid && this.nuevaCat.get('descrip_cat').touched
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:categoria)');
+  }
+
   cargarCategoria(){
     setTimeout(()=>{
       const params = this.route.snapshot.params;

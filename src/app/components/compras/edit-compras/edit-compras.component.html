@@ -4,9 +4,12 @@
     </div>
 </div>
 <div class="row col-lg-12 mx-auto" *ngIf="estado">    
-    <div class="card col-lg-3 p-0" style="max-height: 662px;">
+    <div class="card col-lg-3 col-md-12 col-12 p-0 mb-4" style="max-height: 662px;">
         <div class="card-header">
-            <h4 style="color: #EA320B;">Editar Compra</h4>
+            <i class="fas fa-times fa-lg float-right my-auto py-auto" 
+            style="color: #EA320B;display: inline-block;cursor: pointer;" (click)="volver()"></i>
+            <h4 *ngIf="+eCompra.est_ord_cab != 2" style="color: #EA320B;">Editar Compra</h4>
+            <h4 *ngIf="+eCompra.est_ord_cab === 2" style="color: #EA320B;">Compra</h4>
         </div>        
         <div class="card-body">            
             <div class="form-group">
@@ -34,16 +37,20 @@
                         </small>
                     </div>                                                                                                 
                 
-                <button class="btn boton-rojo btn-block">
+                <button class="btn boton-rojo btn-block px-0 px-md-auto" *ngIf="+eCompra.est_ord_cab != 2">
                     Aceptar
                 </button>                                              
             </form>   
 
         </div>
     </div>
-    <div class="col-lg-8 table-responsive p-0 ml-4 card" >
-        <div class="card-header">
-            <h4 style="color: #EA320B;">Detalle Compra</h4>
+    <div class="col-lg-8 col-md-12 col-12 table-responsive p-0 ml-lg-4 ml-0 card">
+        <div class="card-header mr-0">
+            <h4 style="color: #EA320B;display: inline-block;" class="mt-2">Detalle Compra</h4>
+            <button type="button" class="btn btn-outline-primary float-md-right  float-lg-right  btn-sm"
+             data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: inline-block;"
+             (click)="listarProductos()" data-bs-whatever="@getbootstrap">Agregar</button>
+            
         </div>
         <div class="card-body">
             <table class="table table-hover table-bodered" width="100%" cellspacing="0" id="tablaCarrito">
@@ -55,7 +62,7 @@
                         <th>Cantidad</th>
                         <th>Precio</th>
                         <th>Monto</th>
-                        <th>Eliminar</th>
+                        <th *ngIf="+eCompra.est_ord_cab != 2">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,15 +70,82 @@
                         <td>{{i+1}}</td>
                         <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.nom_imagen}}" alt=""></td>
                         <td>{{prod.nom_prod}}</td>
-                        <td><input type="text" (keyup)="aumentar(prod)" maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det}}"></td>
-                        <td>{{prod.unit_price_ord_det}}</td>
+                        <td><input type="text" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentar(prod)" (keypress)="soloNumeros($event)" maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det}}"></td>
+                        <td><input type="text" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentarPrecio(prod)" (keypress)="soloNumeros($event)" maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>
                         <td>{{prod.unit_price_ord_det * prod.cant_ord_det}}</td>
-                        <td><a (click)="eliminar(prod.ord_comp_det,prod.nom_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></a></td>
+                        <td *ngIf="+eCompra.est_ord_cab != 2"><button (click)="eliminar(prod.ord_comp_det,prod.nom_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></button></td>
                     </tr>
                 </tbody>
             </table> 
         </div>
     </div>
 </div>
+
+<div class="modal fade"  id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg ">
+    <div class="modal-content col-lg-10 p-0">
+      <div class="card-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="display: inline-block;color: red;">Agregar Detalle</h5>        
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="mx-lg-3">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Buscar producto:</label>
+            <input type="text" class="form-control" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}"
+             (keyup)="buscar()"  id="recipient-name">
+          </div>                    
+        </form>
+        <div class="row col-lg-12 mx-lg-3 mb-3" >
+            <div class="card col-lg-3 py-3 ml-3 mb-3 container" *ngFor="let pr of listaFiltro">
+                <div class="col-lg-12 col-12 d-flex justify-content-center">
+                    <img style="width: 70px;height: 70px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{pr.nom_producto}}" alt="">                                    
+                    &nbsp;<p>Nombre: {{pr.nom_prod}}</p> 
+                </div>     
+                <div class="col-lg-12 d-flex justify-content-center">  
+                    <br/><br/>                     
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" 
+                    data-bs-target="#cantPrecio" (click)="setProducto(pr)" data-bs-whatever="@getbootstrap">
+                        Añadir</button> 
+                </div>                          
+            </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cantPrecio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" *ngIf="aProducto" style="color: red;">{{aProducto.nom_prod | uppercase}}</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Precio:</label>
+                <input type="text" (keypress)="soloNumeros($event)" [(ngModel)]="precio" [ngModelOptions]="{standalone: true}" class="form-control" >
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Cantidad:</label>
+                <input type="text" (keypress)="soloNumeros($event)" [(ngModel)]="cantidad" [ngModelOptions]="{standalone: true}" class="form-control">
+              </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="anadir()">Añadir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 

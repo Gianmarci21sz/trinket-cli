@@ -59,7 +59,18 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:listaCompras)');" routerLinkActive="active" #login="routerLinkActive"> Lista Compras </a></li>          
           <li class="nav-item"> <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:compras)');"  routerLinkActive="active" #blankPage="routerLinkActive"> Seleccionar Productos </a></li>
-          <li class="nav-item"> <a class="nav-link"  routerLinkActive="active" #login="routerLinkActive" (click)="irCompras()"> Registrar Compra </a></li>
+          <li class="nav-item"> <a class="nav-link"  routerLinkActive="active" #login="routerLinkActive" (click)="irCompras()"> Registrar Compra </a></li>          
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive}">
+      <a class="nav-link" (click)="invoiceCollapsed = !invoiceCollapsed"  [attr.aria-expanded]="invoiceCollapsed" aria-controls="auth">
+        <span class="menu-title">Invoice</span>
+        <i class="menu-arrow" style="color:#EA320B;"></i>
+        <i class="fas fa-file-invoice menu-icon" style="color:#EA320B;"></i>             
+      </a>
+      <div class="collapse" id="auth" [ngbCollapse]="!invoiceCollapsed">
+        <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:listaInvoice)');" routerLinkActive="active" #login="routerLinkActive"> Lista Invoice </a></li>          
           <li class="nav-item"> <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:addInvoice)');" routerLinkActive="active" #login="routerLinkActive"> Registrar Invoice </a></li>
         </ul>

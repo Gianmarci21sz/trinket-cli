@@ -34,6 +34,10 @@ export class UpProveedorComponent implements OnInit {
     this.cargarPaises();    
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:proveedor)');
+  }
+
   cargarProveedor(){
     let params = this.route.snapshot.params;
     if(params){

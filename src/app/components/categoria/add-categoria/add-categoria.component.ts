@@ -29,6 +29,10 @@ export class AddCategoriaComponent implements OnInit {
     return this.nuevaCat.get('descrip_cat').invalid && this.nuevaCat.get('descrip_cat').touched
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:categoria)');
+  }
+
   crearFormulario() {
     this.nuevaCat = this.fb.group({      
       nom_cat  : ['',  Validators.required ],

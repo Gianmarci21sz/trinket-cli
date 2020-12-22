@@ -58,6 +58,10 @@ export class UpProductoComponent implements OnInit {
     this.cargarProducto();   
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:producto)');
+  }
+
   get nombreNoValido() {
     return this.nuevoProd.get('nom_prod').invalid && this.nuevoProd.get('nom_prod').touched
   }

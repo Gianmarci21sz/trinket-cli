@@ -6,66 +6,76 @@
 <div class="col-lg-12 mx-auto" *ngIf="estado">    
     <div class="card">
         <div class="card-header">
+            <i class="fas fa-times fa-lg float-right my-auto py-auto" 
+            style="color: #EA320B;display: inline-block;cursor: pointer;" (click)="volver()"></i>
             <h4 style="color: #EA320B;">Actualizar Producto</h4>
         </div>
         <div class="card-body">
-            <form [formGroup]="nuevoProd" (ngSubmit)="actualizar()" class='row'>
-                <div class="col-lg-4">
-                    <div class="form-group">
+            <form [formGroup]="nuevoProd" (ngSubmit)="actualizar()">
+                <div class="row">                    
+                    <div class="form-group col-lg-4">
+                        <label for="">Nombre Producto</label>
                         <input type="text" [class.is-invalid]="nombreNoValido" class="form-control" placeholder="Nombre Producto" formControlName='nom_prod' >
                         <small *ngIf="nombreNoValido" class="text-danger">
                             Campo invalido
-                          </small>
+                            </small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-lg-4">
+                        <label for="">Descripcion Producto</label>
                         <input class="form-control" [class.is-invalid]="descripcionNoValido" placeholder="Descripcion Producto" formControlName='descrip_prod'>
                         <small *ngIf="descripcionNoValido" class="text-danger">
                             Campo invalido
-                          </small>
+                            </small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-lg-4">
+                        <label for="">Precio Producto</label>
                         <input type="number" [class.is-invalid]="precioNoValido" step="any" class="form-control" placeholder="Precio Producto" formControlName='precio_unit_prod'>
                         <small *ngIf="precioNoValido" class="text-danger">
                             Campo invalido
-                          </small>
+                            </small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-lg-4">
+                        <label for="">Nota Producto</label>
                         <input class="form-control" [class.is-invalid]="notaProdNoValido" placeholder="Nota Producto" formControlName='nota_prod'>
                         <small *ngIf="notaProdNoValido" class="text-danger">
                             Campo invalido
-                          </small>
+                            </small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-lg-4">
+                        <label for="">Categoria</label>
                         <select class='custom-select' [class.is-invalid]="categoriaNoValido" formControlName='id_cat'>                        
                             <option *ngFor='let c of listaCategorias' value="{{c.id_cat}}">{{c.nom_cat}}</option>
                         </select>
                         <small *ngIf="categoriaNoValido" class="text-danger">
                             Campo invalido
                         </small>
-                    </div>               
-    
-                    <input type="file" class="d-none" (change)="onPhotoSelected1($event)" #photoInput1 >
-                    <img style='height: 300px;width: 300px;' [src]="photoSelected1 || imagenes[0]" class="img-fluid" alt="No image"
-                        (click)="photoInput1.click()">
-                </div>  
-                <div class="col-lg-4">
-                    <input type="file" class="d-none" (change)="onPhotoSelected2($event)" #photoInput2 >
-                    <img style='height: 300px;width: 300px;padding-bottom: 20px;' [src]="photoSelected2 || imagenes[1]" class="img-fluid" alt="No image"
-                        (click)="photoInput2.click()">
+                    </div>                      
+                </div>                
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input type="file" class="d-none" (change)="onPhotoSelected1($event)" #photoInput1 >
+                        <img style='height: 270px;cursor: pointer;' [src]="photoSelected1 || imagenes[0]" class="img-fluid col-12" alt="No image"
+                            (click)="photoInput1.click()">
 
-                    <input type="file" class="d-none" (change)="onPhotoSelected3($event)" #photoInput3 >
-                    <img style='height: 300px;width: 300px;padding-bottom: 20px;' [src]="photoSelected3 || imagenes[2]" class="img-fluid" alt="No image"
-                        (click)="photoInput3.click()">
-                </div>  
-                <div class="col-lg-4">
-                    <input type="file" class="d-none" (change)="onPhotoSelected4($event)" #photoInput4 >
-                    <img style='height: 300px;width: 300px;padding-bottom: 20px;' [src]="photoSelected4 || imagenes[3]" class="img-fluid" alt="No image"
-                        (click)="photoInput4.click()">
-
-                    <input type="file" class="d-none" (change)="onPhotoSelected5($event)" #photoInput5 >
-                    <img style='height: 300px;width: 300px;padding-bottom: 20px;' [src]="photoSelected5 || imagenes[4]" class="img-fluid" alt="No image"
-                        (click)="photoInput5.click()">
-                </div>                           
+                        <input type="file" class="d-none" (change)="onPhotoSelected2($event)" #photoInput2 >
+                        <img style='height: 270px;cursor: pointer;' [src]="photoSelected2 || imagenes[1]" class="img-fluid col-12" alt="No image"
+                            (click)="photoInput2.click()">
+                    </div>
+                    <div class="col-lg-4">    
+                        <input type="file" class="d-none" (change)="onPhotoSelected3($event)" #photoInput3 >
+                        <img style='height: 270px;cursor: pointer;' [src]="photoSelected3 || imagenes[2]" class="img-fluid col-12" alt="No image"
+                            (click)="photoInput3.click()">
+                        
+                        <input type="file" class="d-none" (change)="onPhotoSelected4($event)" #photoInput4 >
+                        <img style='height: 270px;cursor: pointer;' [src]="photoSelected4 || imagenes[3]" class="img-fluid col-12" alt="No image"
+                            (click)="photoInput4.click()">
+                    </div>  
+                    <div class="col-lg-4">    
+                        <input type="file" class="d-none" (change)="onPhotoSelected5($event)" #photoInput5 >
+                        <img style='height: 270px;cursor: pointer;' [src]="photoSelected5 || imagenes[4]" class="img-fluid col-12" alt="No image"
+                            (click)="photoInput5.click()">
+                    </div>  
+                </div>
 
                 <button class="btn boton-rojo btn-block">
                     Actualizar

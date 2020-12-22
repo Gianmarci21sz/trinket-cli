@@ -34,7 +34,6 @@ import { BackrestComponent } from './components/backrest/backrest.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { RegistroCompraComponent } from './components/compras/registro-compra/registro-compra.component';
 import { RegistroInvoiceComponent } from './components/compras/registro-invoice/registro-invoice.component';
-import { UpCompraComponent } from './components/compras/up-compra/up-compra.component';
 import { ListaComprasComponent } from './components/compras/lista-compras/lista-compras.component';
 import { EditComprasComponent } from './components/compras/edit-compras/edit-compras.component';
 import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-invoice.component';
@@ -65,8 +64,7 @@ import { VentasComponent } from './components/ventas/ventas.component';
     BackrestComponent,
     ClienteComponent,
     RegistroCompraComponent,
-    RegistroInvoiceComponent,
-    UpCompraComponent,    
+    RegistroInvoiceComponent,        
     ListaComprasComponent,
     EditComprasComponent,
     ListaInvoiceComponent,

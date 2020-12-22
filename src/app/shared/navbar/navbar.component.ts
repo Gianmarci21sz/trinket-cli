@@ -3,6 +3,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ItemCarro } from 'src/app/models/itemCarro';
 import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+declare var Swal : any;
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +24,26 @@ export class NavbarComponent implements OnInit {
     
   }
 
-  eliminar(id : number){    
-    this.compraService.eliminar(id);
+  eliminar(id : number,imagen : string,producto :string){    
+    Swal.fire({
+      title: 'Confirme acción',
+      html: `Seguro de eliminar producto del carrito?:<br/><br/>
+            <img style="height: 50px;width: 50px;" 
+            src="http://192.168.1.13:1151/api/producto/verArchivo/${imagen}" 
+            class="card-img-top mx-auto"
+            alt="">&nbsp;&nbsp;&nbsp; ${producto}`,      
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText : 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.compraService.eliminar(id);
+      }
+    });
+    
   }
 
   // toggle sidebar in small devices

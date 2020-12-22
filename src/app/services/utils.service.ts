@@ -5,6 +5,7 @@ declare var $:any;
   providedIn: 'root'
 })
 export class UtilsService {
+  public ubicacion : string = "";
 
   constructor() { }
 

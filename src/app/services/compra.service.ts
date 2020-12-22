@@ -47,8 +47,8 @@ export class CompraService {
     return this.http.delete<boolean>(this.url+'delDetalle/'+id,{headers:this.headers});
   }
 
-  upDetalleCantidad(id:number,cantidad:number):Observable<boolean>{
-    return this.http.put<boolean>(this.url+`upDetalleCantidad/${id}/${cantidad}`,{headers:this.headers});
+  upDetalleCantidad(id:number,cantidad:number,precio:number):Observable<boolean>{
+    return this.http.put<boolean>(this.url+`upDetalleCantidad/${id}/${cantidad}/${precio}`,{headers:this.headers});
   }
 
   upCompraCondicion(id:number,condicion:string):Observable<boolean>{
@@ -63,7 +63,8 @@ export class CompraService {
     if(this.items.length>0){
       for(let ic of this.items){        
         if(ic.prod_id === item.prod_id){
-          ic.cant_ord_det++;
+          ic.cant_ord_det = item.cant_ord_det;
+          ic.unit_price_ord_det = item.unit_price_ord_det;
           ref = false;
           break;
         }else{
@@ -97,7 +98,15 @@ export class CompraService {
   aumentar(id:number,cantidad:number){    
     for(let ic of this.items){      
       if(+ic.prod_id === +id){        
-          ic.cant_ord_det = +cantidad;             
+          ic.cant_ord_det = +cantidad;                      
+      }
+    } 
+    localStorage.setItem('items',JSON.stringify(this.items));
+  }
+  aumentarPrecio(id:number,precio:number){    
+    for(let ic of this.items){      
+      if(+ic.prod_id === +id){        
+          ic.unit_price_ord_det = +precio;                      
       }
     } 
     localStorage.setItem('items',JSON.stringify(this.items));

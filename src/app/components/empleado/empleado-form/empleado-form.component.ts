@@ -171,6 +171,10 @@ export class EmpleadoFormComponent implements OnInit {
     }
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:empleado)');
+  }
+
   editar(){
     this.llenarEmpleado();
     if ( this.nuevoEmp.invalid ) {      

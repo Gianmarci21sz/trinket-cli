@@ -6,6 +6,7 @@ import { tipoDocIdentidad } from 'src/app/models/tipoDocIdentidad';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { TipoDocIdentidadService } from 'src/app/services/tipo-doc-identidad.service';
 declare var Swal : any;
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-add-proveedor',
@@ -64,8 +65,8 @@ export class AddProveedorComponent implements OnInit {
     return this.nuevoProv.get('razon_prov').invalid && this.nuevoProv.get('razon_prov').touched
   }   
 
-  cargarPaises(){
-    this.paises = this.proveedorService.listarPaises();
+  cargarPaises(){    
+    this.paises = this.proveedorService.listarPaises();    
   }
 
   cambiar(){
@@ -137,6 +138,10 @@ export class AddProveedorComponent implements OnInit {
         estado_prov:   '1',
       }
     }
+  }
+
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:proveedor)');
   }
 
   agregar(){

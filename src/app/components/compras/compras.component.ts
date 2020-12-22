@@ -5,6 +5,7 @@ import { Producto } from 'src/app/models/producto';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { CompraService } from 'src/app/services/compra.service';
 import { ProductoService } from 'src/app/services/producto.service';
+declare var $ : any;
 
 @Component({
   selector: 'app-compras',
@@ -17,7 +18,11 @@ export class ComprasComponent implements OnInit {
   listaFiltroTexto : Producto[]=[];  
   listaCategoria : Categoria[]=[];
   seleccionado : number = 0;
+  aProducto : Producto;
+  texto : string;
   estado : boolean = false;
+  precio : number;
+  cantidad : number;
   constructor(private productoService:ProductoService,
               public compraService:CompraService,
               private categoriaService : CategoriaService) { }
@@ -33,13 +38,13 @@ export class ComprasComponent implements OnInit {
     });
   }
 
-  buscar(texto:string){          
+  buscar(){          
     this.listaFiltroTexto = [];
     for(let f of this.listaFiltro){      
-      if(f.nom_prod.indexOf(texto)!=-1){
+      if(f.nom_prod.toLowerCase().indexOf(this.texto.toLowerCase())!=-1){
         this.listaFiltroTexto.push(f);
       }
-    }
+    }    
   }  
 
   filtrarXcat(id_cat : number){  
@@ -50,6 +55,7 @@ export class ComprasComponent implements OnInit {
         this.listaFiltro.push(f);
       }
     }
+    this.texto= "";
     this.listaFiltroTexto = this.listaFiltro;
   }
 
@@ -59,6 +65,7 @@ export class ComprasComponent implements OnInit {
       this.lista = data; 
       this.listaFiltro = this.lista;
       this.listaFiltroTexto = this.listaFiltro;    
+      this.texto= "";
       setTimeout(()=>{
         this.estado = true;
       },500)
@@ -66,18 +73,32 @@ export class ComprasComponent implements OnInit {
   }
 
   agregar(u : Producto){
+    this.aProducto = u;     
+  }
+
+  soloNumeros(e) {
+    var key = window.event ? e.which : e.keyCode;
+    if (key < 48 || key > 57) {
+        e.preventDefault();
+    }
+  }
+
+  anadir(){
     let item : ItemCarro = {
-      prod_id : u.id_prod,
-      nombre_prod : u.nom_prod,
-      imagen : u.nom_producto,
-      unit_price_ord_det : u.precio_unit_prod,
-      cant_ord_det : 1      
+      prod_id : this.aProducto.id_prod,
+      nombre_prod : this.aProducto.nom_prod,
+      imagen : this.aProducto.nom_producto,
+      unit_price_ord_det : this.precio,
+      cant_ord_det : this.cantidad
     };
     this.compraService.agregar(item);  
-    this.compraService.agregado = true;
+    this.compraService.agregado = true; 
+    this.precio = null;
+    this.cantidad = null;   
+    $('#cantPrecio .close').click();    
     setTimeout(()=>{
       this.compraService.agregado = false;;
-    },1000);  
+    },1000); 
   }
 
 }

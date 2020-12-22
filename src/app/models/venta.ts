@@ -6,4 +6,5 @@ export interface Venta{
     id_vent_cab:    string;
     nom_cli:        string;
     num_trans_cab:  string;
+    descrip_pag?:   string;
 }

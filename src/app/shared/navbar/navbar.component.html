@@ -23,12 +23,12 @@
               <div class="col-md-3">
                 <img src="http://192.168.1.13:1151/api/producto/verArchivo/{{it.imagen}}" alt="" height="50px" width="50px">            
               </div>
-              <div class="col-md-4">
+              <div class="col-md-5">
                 {{it.nombre_prod}}&nbsp; 
                 <p style="display: block;">S/.{{it.unit_price_ord_det}} x {{it.cant_ord_det}}</p>                
               </div>
-              <div class="col-md-5 d-flex justify-content-center align-items-center">
-                <i class="far fa-trash-alt" style="color: #EA320B;cursor: pointer;display: block;" (click)="eliminar(it.prod_id)"></i>
+              <div class="col-md-3 d-flex justify-content-center align-items-center" style="cursor: pointer;display: block;" (click)="eliminar(it.prod_id,it.imagen,it.nombre_prod)">
+                <i class="far fa-trash-alt" style="color: #EA320B;" ></i>
               </div>
             </div>            
           </div>                  

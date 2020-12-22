@@ -106,6 +106,10 @@ export class RegistroInvoiceComponent implements OnInit {
     }
   }
 
+  volver(){
+    this.router.navigateByUrl('/menu/(opt:listaInvoice)');
+  }
+
   agregar() {
     if ( this.nuevoInvoice.invalid ) {      
       return Object.values( this.nuevoInvoice.controls ).forEach( control => {        

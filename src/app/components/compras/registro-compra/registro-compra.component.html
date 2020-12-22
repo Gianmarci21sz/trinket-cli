@@ -4,29 +4,31 @@
     </div>
 </div>
 <div class="row col-lg-12 mx-auto" *ngIf="estado" >    
-    <div class="card col-lg-4 p-0 mb-4" style="max-height: 330px;">
+    <div class="card col-lg-4 p-0 mb-4" style="max-height: 370px;">
         <div class="card-header">
+            <i class="fas fa-times fa-lg float-right my-auto py-auto" 
+            style="color: #EA320B;display: inline-block;cursor: pointer;" (click)="volver()"></i>
             <h4 style="color: #EA320B;">Agregar Compra</h4>
         </div>        
         <div class="card-body">
-            <form [formGroup]="nuevaCompra" class='row container' (ngSubmit)="agregar()">                
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <input type="text" [class.is-invalid]="condicionInvalida" class="form-control" placeholder="Condicion de envio" formControlName='cond_env' >
-                        <small *ngIf="condicionInvalida" class="text-danger">
-                            Campo invalido
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <select [class.is-invalid]="proveedorInvalido" class="custom-select" formControlName='prov_id'>
-                            <option value="{{p.id_prov}}" *ngFor="let p of proveedores">{{p.razon_prov}}</option>
-                        </select>
-                        <small *ngIf="proveedorInvalido" class="text-danger">
-                            Campo invalido
-                        </small>
-                    </div>                                                            
+            <form [formGroup]="nuevaCompra" class='' (ngSubmit)="agregar()">                   
+                <div class="form-group">
+                    <label for="">Condicion de Envio</label>
+                    <input type="text" [class.is-invalid]="condicionInvalida" class="form-control" placeholder="Condicion de envio" formControlName='cond_env' >
+                    <small *ngIf="condicionInvalida" class="text-danger">
+                        Campo invalido
+                    </small>
                 </div>
-                <button class="btn boton-rojo btn-block">
+                <div class="form-group">
+                    <label for="">Proveedor</label>
+                    <select [class.is-invalid]="proveedorInvalido" class="custom-select" formControlName='prov_id'>                        
+                        <option value="{{p.id_prov}}" *ngFor="let p of proveedores">{{p.razon_prov}}</option>
+                    </select>
+                    <small *ngIf="proveedorInvalido" class="text-danger">
+                        Campo invalido
+                    </small>
+                </div>                    
+                <button class="btn boton-rojo btn-block mx-0">
                     Aceptar
                 </button>                                              
             </form>            
@@ -34,7 +36,7 @@
     </div>    
     
     
-    <div class="col-lg-7 table-responsive p-0 ml-4 card">
+    <div class="col-lg-7 table-responsive p-0 ml-0 ml-lg-4 card">
         <div class="card-header">
             <h4 style="color: #EA320B;">Detalle Compra</h4>
         </div>
@@ -56,10 +58,10 @@
                         <td>{{i+1}}</td>
                         <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.imagen}}" alt=""></td>
                         <td>{{prod.nombre_prod}}</td>
-                        <td><input type="text" [(ngModel)]="cajas[i]" maxlength="3" class="form-control" (keyup)="aumentar(prod.prod_id,i)" value="{{prod.cant_ord_det}}" /></td>
-                        <td>{{prod.unit_price_ord_det}}</td>
+                        <td><input type="text" [(ngModel)]="cajas[i]" maxlength="3" class="form-control" (keyup)="aumentar(prod.prod_id,i)" (keypress)="soloNumeros($event)" value="{{prod.cant_ord_det}}" /></td>
+                        <td><input type="text" (keyup)="aumentarPrecio(prod)" (keypress)="soloNumeros($event)" maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>
                         <td>{{prod.unit_price_ord_det * prod.cant_ord_det}}</td>
-                        <td><a (click)="eliminar(prod.prod_id)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></a></td>
+                        <td><a (click)="eliminar(prod.prod_id,prod.imagen,prod.nombre_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></a></td>
                     </tr>
                 </tbody>
             </table>

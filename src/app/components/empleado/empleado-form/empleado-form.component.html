@@ -6,33 +6,41 @@
 <div class="col-lg-12 mx-auto" *ngIf="estado">    
     <div class="card">
         <div class="card-header" *ngIf="!editing">
+            <i class="fas fa-times fa-lg float-right my-auto py-auto" 
+            style="color: #EA320B;display: inline-block;cursor: pointer;" (click)="volver()"></i>
             <h4 style="color: #EA320B;">Agregar Empleado</h4>
         </div>
         <div class="card-header" *ngIf="editing">
+            <i class="fas fa-times fa-lg float-right my-auto py-auto" 
+            style="color: #EA320B;display: inline-block;cursor: pointer;" (click)="volver()"></i>
             <h4 style="color: #EA320B;">Actualizar Empleado</h4>
         </div>
         <div class="card-body container">
             <form [formGroup]="nuevoEmp" class='row'>                
                 <div class="col-lg-6 p-2">
                     <div class="form-group">
+                        <label for="">Nombre Empleado</label>
                         <input type="text" [class.is-invalid]="nombreNoValido" class="form-control" placeholder="Nombres" formControlName='nom_user' >
                         <small *ngIf="nombreNoValido" class="text-danger">
                             Campo invalido
                           </small>
                     </div>
                     <div class="form-group">
+                        <label for="">Apellido Empleado</label>
                         <input class="form-control" [class.is-invalid]="apellidonNoValido" placeholder="Apellidos" formControlName='ape_user'>
                         <small *ngIf="apellidonNoValido" class="text-danger">
                             Campo invalido
                           </small>
                     </div>
                     <div class="form-group">
+                        <label for="">Email Empleado</label>
                         <input type="text" [class.is-invalid]="emailNoValido" step="any" class="form-control" placeholder="Email" formControlName='email'>
                         <small *ngIf="emailNoValido" class="text-danger">
                             Campo invalido
                           </small>
                     </div>
                     <div class="form-group">
+                        <label for="">Rol Empleado</label>
                         <select class='custom-select' [class.is-invalid]="idRolNoValido" formControlName='id_rol'>                        
                             <option *ngFor='let c of listaRoles' value="{{c.id_rol}}">{{c.nombre_rol}}</option>
                         </select>
@@ -43,26 +51,30 @@
                 </div> 
                 <div class="col-lg-6 p-2">
                     <div class="form-group">
-                        <select class='custom-select' disabled [class.is-invalid]="idRolNoValido" formControlName='id_tip'>                        
+                        <label for="">Tipo Documento</label>
+                        <select class='custom-select' disabled [class.is-invalid]="idTipNoValido" formControlName='id_tip'>                        
                             <option *ngFor='let c of listaTiposDocIdent' value="{{c.id_tip}}">{{c.descrip_tip}}</option>
                         </select>
-                        <small *ngIf="idRolNoValido" class="text-danger">
+                        <small *ngIf="idTipNoValido" class="text-danger">
                             Campo invalido
                         </small>
                     </div> 
                     <div class="form-group">
+                        <label for="">N° Documento Empleado</label>
                         <input class="form-control" type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numDniUserNoValido" placeholder="Numero documento dni" formControlName='num_dni'>
                         <small *ngIf="numDniUserNoValido" class="text-danger">
                             Campo invalido
                         </small>
                     </div>                                     
                     <div class="form-group">
+                        <label for="">Telefono Empleado</label>
                         <input class="form-control" (keypress)="soloNumeros($event)" type="text" [class.is-invalid]="telefonoNoValido" placeholder="Telefono" formControlName='telefono_user'>
                         <small *ngIf="telefonoNoValido" class="text-danger">
                             Ingrese numero valido de 9 digitos
                           </small>
                     </div>
                     <div class="form-group">
+                        <label for="">Direccion Empleado</label>
                         <input class="form-control" type="text" [class.is-invalid]="direccionNoValido" placeholder="Direccion" formControlName='direcc_user'>
                         <small *ngIf="direccionNoValido" class="text-danger">
                             Campo invalido
