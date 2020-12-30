@@ -13,43 +13,43 @@
         <i class="mdi mdi-bookmark-check nav-profile-badge" style="color:#EA320B;"></i>
       </a>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active': empleado.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': empleado.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:empleado)');" routerLinkActive #empleado="routerLinkActive">
         <span class="menu-title">Empleado</span>
         <i class="mdi mdi-account menu-icon" style="color:#EA320B;"></i>
       </a>
     </li> 
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Comprador'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:producto)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Producto</span>
         <i class=" fas fa-dolly menu-icon" style="color:#EA320B;"></i>
       </a>
     </li>   
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Comprador'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:categoria)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Categoria</span>
         <i class="fas fa-boxes menu-icon" style="color:#EA320B;"></i>
       </a>
     </li>  
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Comprador'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:proveedor)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Proveedor</span>
         <i class=" fas fa-dolly-flatbed menu-icon" style="color:#EA320B;"></i>        
       </a>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Vendedor'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:cliente)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Clientes</span>
         <i class="fas fa-users menu-icon" style="color:#EA320B;"></i>                
       </a>
     </li>  
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Vendedor'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:ventas)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Ventas</span>
         <i class="fas fa-cash-register menu-icon" style="color:#EA320B;"></i>        
       </a>
     </li>       
-    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive}">
+    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive}" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Comprador'">
       <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed"  [attr.aria-expanded]="samplePagesCollapsed" aria-controls="auth">
         <span class="menu-title">Compras</span>
         <i class="menu-arrow" style="color:#EA320B;"></i>
@@ -63,7 +63,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active' : blankPage.isActive || login.isActive}">
+    <li class="nav-item" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Comprador'">
       <a class="nav-link" (click)="invoiceCollapsed = !invoiceCollapsed"  [attr.aria-expanded]="invoiceCollapsed" aria-controls="auth">
         <span class="menu-title">Invoice</span>
         <i class="menu-arrow" style="color:#EA320B;"></i>
@@ -76,7 +76,7 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }">
+    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:backupRestore)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Backup y Restore</span>
         <i class="fas fa-database menu-icon" style="color:#EA320B;"></i>        

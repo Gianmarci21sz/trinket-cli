@@ -5,7 +5,8 @@ import { Producto } from 'src/app/models/producto';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { CompraService } from 'src/app/services/compra.service';
 import { ProductoService } from 'src/app/services/producto.service';
-declare var $ : any;
+import { UtilsService } from 'src/app/services/utils.service';
+declare var $: any;
 
 @Component({
   selector: 'app-compras',
@@ -13,92 +14,100 @@ declare var $ : any;
   styleUrls: ['./compras.component.scss']
 })
 export class ComprasComponent implements OnInit {
-  lista : Producto[]=[];   
-  listaFiltro : Producto[]=[];  
-  listaFiltroTexto : Producto[]=[];  
-  listaCategoria : Categoria[]=[];
-  seleccionado : number = 0;
-  aProducto : Producto;
-  texto : string;
-  estado : boolean = false;
-  precio : number;
-  cantidad : number;
-  constructor(private productoService:ProductoService,
-              public compraService:CompraService,
-              private categoriaService : CategoriaService) { }
+  lista: Producto[] = [];
+  listaFiltro: Producto[] = [];
+  listaFiltroTexto: Producto[] = [];
+  listaCategoria: Categoria[] = [];
+  seleccionado: number = 0;
+  aProducto: Producto;
+  texto: string;
+  estado: boolean = false;
+  precio: number;
+  cantidad: number;
+  pageActual : number = 1;  
+  constructor(private productoService: ProductoService,
+    public compraService: CompraService,
+    private categoriaService: CategoriaService,
+    private utilsService:UtilsService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.listarProductos();
     this.cargarCategorias();
+    $('#cantPrecio').draggable();
+    this.utilsService.setDefaultPositionModal('#cantPrecio');
   }
 
-  cargarCategorias(){
-    this.categoriaService.listar().subscribe((data:Categoria[])=>{
+  cargarCategorias() {
+    this.categoriaService.listar().subscribe((data: Categoria[]) => {
       this.listaCategoria = data;
     });
   }
 
-  buscar(){          
+  cerrarModal() { 
+    this.utilsService.resetPositionModal('#cantPrecio');
+  }
+
+  buscar() {
     this.listaFiltroTexto = [];
-    for(let f of this.listaFiltro){      
-      if(f.nom_prod.toLowerCase().indexOf(this.texto.toLowerCase())!=-1){
+    for (let f of this.listaFiltro) {
+      if (f.nom_prod.toLowerCase().indexOf(this.texto.toLowerCase()) != -1) {
         this.listaFiltroTexto.push(f);
       }
-    }    
-  }  
+    }
+  }
 
-  filtrarXcat(id_cat : number){  
-    this.seleccionado = id_cat;  
+  filtrarXcat(id_cat: number) {
+    this.seleccionado = id_cat;
     this.listaFiltro = [];
-    for(let f of this.lista){
-      if(+f.id_cat === +id_cat){
+    for (let f of this.lista) {
+      if (+f.id_cat === +id_cat) {
         this.listaFiltro.push(f);
       }
     }
-    this.texto= "";
+    this.texto = "";
     this.listaFiltroTexto = this.listaFiltro;
   }
 
-  listarProductos(){
-    this.seleccionado = 0;  
-    this.productoService.listar().subscribe((data:Producto[])=>{
-      this.lista = data; 
+  listarProductos() {
+    this.seleccionado = 0;
+    this.productoService.listar().subscribe((data: Producto[]) => {
+      this.lista = data;
       this.listaFiltro = this.lista;
-      this.listaFiltroTexto = this.listaFiltro;    
-      this.texto= "";
-      setTimeout(()=>{
+      this.listaFiltroTexto = this.listaFiltro;
+      this.texto = "";
+      setTimeout(() => {
         this.estado = true;
-      },500)
+      }, 500)
     });
   }
 
-  agregar(u : Producto){
-    this.aProducto = u;     
+  agregar(u: Producto) {
+    this.aProducto = u;
   }
 
   soloNumeros(e) {
     var key = window.event ? e.which : e.keyCode;
     if (key < 48 || key > 57) {
-        e.preventDefault();
+      e.preventDefault();
     }
   }
 
-  anadir(){
-    let item : ItemCarro = {
-      prod_id : this.aProducto.id_prod,
-      nombre_prod : this.aProducto.nom_prod,
-      imagen : this.aProducto.nom_producto,
-      unit_price_ord_det : this.precio,
-      cant_ord_det : this.cantidad
+  anadir() {
+    let item: ItemCarro = {
+      prod_id: this.aProducto.id_prod,
+      nombre_prod: this.aProducto.nom_prod,
+      imagen: this.aProducto.nom_producto,
+      unit_price_ord_det: this.precio,
+      cant_ord_det: this.cantidad
     };
-    this.compraService.agregar(item);  
-    this.compraService.agregado = true; 
+    this.compraService.agregar(item);
+    this.compraService.agregado = true;
     this.precio = null;
-    this.cantidad = null;   
-    $('#cantPrecio .close').click();    
-    setTimeout(()=>{
+    this.cantidad = null;
+    $('#cantPrecio .close').click();
+    setTimeout(() => {
       this.compraService.agregado = false;;
-    },1000); 
+    }, 1000);
   }
 
 }

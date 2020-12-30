@@ -58,19 +58,33 @@ export class LoginComponent implements OnInit {
         if(data){          
           this.empleadoService.empleadolog=data;
           this.empleadoService.guardarLocal();
-          Swal.fire({
-            title: 'Bienvenido a Trinket',
-            text: "Acceso concedido",
-            icon: 'success',          
-            confirmButtonText: 'OK',
-            allowOutsideClick: false
-          }).then((result) => {
-            if (result.isConfirmed) {    
-              this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
-              +' '+this.empleadoService.empleadolog.ape_emp);  
-              this.router.navigateByUrl('/menu/(opt:empleado)');     
-            }
-          });                   
+          if(this.empleadoService.empleadolog.nombre_rol === 'Repartidor'){
+            Swal.fire(
+              'Error',
+              'Usted no tiene acceso al sistema',
+              'error'
+            )
+          }else{
+            Swal.fire({
+              title: 'Bienvenido a Trinket',
+              text: "Acceso concedido",
+              icon: 'success',          
+              confirmButtonText: 'OK',
+              allowOutsideClick: false
+            }).then((result) => {
+              if (result.isConfirmed) {    
+                this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
+                +' '+this.empleadoService.empleadolog.ape_emp);  
+                if(this.empleadoService.empleadolog.nombre_rol === 'Administrador'){
+                  this.router.navigateByUrl('/menu/(opt:empleado)');
+                }else if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+                  this.router.navigateByUrl('/menu/(opt:cliente)');
+                }else if (this.empleadoService.empleadolog.nombre_rol === 'Comprador'){
+                  this.router.navigateByUrl('/menu/(opt:producto)');
+                }
+              }
+            }); 
+          }                
         }else{
           alert('Error contraseña o email');
         }

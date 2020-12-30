@@ -5,7 +5,7 @@ declare var $:any;
   providedIn: 'root'
 })
 export class UtilsService { 
-  cargaEstado : boolean = false;
+  cargaEstado : boolean = false;  
   constructor() {     
   }  
 
@@ -42,5 +42,21 @@ export class UtilsService {
         }
       });      
     },150); 
+  }
+
+  setDefaultPositionModal(id : string){
+    $(id).data({
+      'originalLeft': $(id).css('left'),
+      'origionalTop': $(id).css('top')
+    }); 
+  }
+
+  resetPositionModal(id : string){
+    setTimeout(()=>{
+      $(id).css({
+        'left': $(id).data('originalLeft'),
+        'top': $(id).data('origionalTop')
+      });
+    },500); 
   }
 }

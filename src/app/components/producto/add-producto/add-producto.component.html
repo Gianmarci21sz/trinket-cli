@@ -51,19 +51,19 @@
                         </small>
                     </div>  
                 </div>                    
-
-                <div class="row">
-                    <div class="col-lg-4">
+                <label for="">Imagen Principal</label>
+                <div class="row">                    
+                    <div class="col-lg-4">                        
                         <input type="file" class="d-none" (change)="onPhotoSelected1($event)" #photoInput1 >
                         <img style='height: 270px;cursor: pointer;' [src]="photoSelected1 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
-                            (click)="photoInput1.click()">                                            
+                            (click)="photoInput1.click()">                          
                     </div>  
                     <div class="col-lg-4">
                         <input type="file" class="d-none" (change)="onPhotoSelected2($event)" #photoInput2 >
                         <img style='height: 270px;cursor: pointer;' [src]="photoSelected2 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput2.click()">
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4">                        
                         <input type="file" class="d-none" (change)="onPhotoSelected3($event)" #photoInput3 >
                         <img style='height: 270px;cursor: pointer;' [src]="photoSelected3 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput3.click()">                                           

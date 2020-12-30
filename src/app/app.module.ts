@@ -41,6 +41,7 @@ import { VentasComponent } from './components/ventas/ventas.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
 import { RestablecerComponent } from './components/restablecer/restablecer.component';
 import { ErrorComponent } from './components/error/error.component';
+import { NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { ErrorComponent } from './components/error/error.component';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
-    HttpClientModule    
+    HttpClientModule,
+    NgxPaginationModule 
   ],
   providers: [ThemeService],
   bootstrap: [AppComponent]

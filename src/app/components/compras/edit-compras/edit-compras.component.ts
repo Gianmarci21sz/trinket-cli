@@ -6,6 +6,7 @@ import { ItemCarro } from 'src/app/models/itemCarro';
 import { Producto } from 'src/app/models/producto';
 import { CompraService } from 'src/app/services/compra.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
 declare var $ : any;
 declare var toggle : any;
@@ -31,13 +32,20 @@ export class EditComprasComponent implements OnInit {
               private fb:FormBuilder,
               private route:ActivatedRoute,
               private router:Router,
-              private productoService:ProductoService) {
+              private productoService:ProductoService,
+              private utilsService:UtilsService) {
     this.crearFormulario();
     this.cargarCompra();    
+    
   }
 
   ngOnInit(): void {   
-    
+    $('#cantPrecio').draggable();
+    this.utilsService.setDefaultPositionModal('#cantPrecio');
+  }
+
+  cerrarModal(){
+    this.utilsService.resetPositionModal('#cantPrecio');
   }
 
   get condicionInvalida(){
@@ -86,7 +94,7 @@ export class EditComprasComponent implements OnInit {
   }
 
   setProducto(producto:Producto){
-    this.aProducto = producto;
+    this.aProducto = producto;    
   }
 
   listarProductos(){       

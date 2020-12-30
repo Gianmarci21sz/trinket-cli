@@ -11,7 +11,7 @@
       <span class="mdi mdi-menu" style="color: #EA320B;"></span>
     </button>    
     <ul class="navbar-nav navbar-nav-right">      
-      <li class="nav-item nav-profile dropdown" ngbDropdown>
+      <li class="nav-item nav-profile dropdown" ngbDropdown *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador' || empleadoService.empleadolog.nombre_rol === 'Comprador'">
         <a class="nav-link dropdown-toggle" id="carrito" ngbDropdownToggle>
           <div class="nav-profile-img">
             <i class="fas fa-shopping-cart" style="color: #EA320B;padding-top: 7px;"></i>
