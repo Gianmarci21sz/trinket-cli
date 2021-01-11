@@ -17,14 +17,14 @@
         <span class="navbar-brand" style="color: #ffffff;">Categorias:</span>
 
         <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" (click)="show=!show">
           <i class="fas fa-bars" style="color: #ffffff;"></i>
         </button>
+        
 
         <!-- Collapsible content -->
         
-        <div class="collapse navbar-collapse" id="basicExampleNav">
+        <div class="collapse navbar-collapse" id="basicExampleNav" [ngClass]="{'show' : show}">
 
           <!-- Links -->
           <ul class="navbar-nav mr-auto" style="color: #ffffff;">
@@ -53,7 +53,7 @@
 
           <form class="form-inline">
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}" (keypress)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
+              <input class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}" (keyup)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
             </div>
           </form>
         </div>
@@ -111,7 +111,7 @@
           <!--Grid column-->       
         </div>
         <!--Grid row-->
-        <pagination-controls  previousLabel="Anterior" nextLabel="Siguiente"  responsive="true" (pageChange)="pageActual = $event"></pagination-controls>
+        <pagination-controls class="custom-pagination" previousLabel="Anterior" nextLabel="Siguiente"  responsive="true" (pageChange)="pageActual = $event"></pagination-controls>
       </section>
       <!--Section: Products v.3-->
       

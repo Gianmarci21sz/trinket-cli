@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 declare var Swal : any;
 
 @Component({
@@ -17,11 +18,15 @@ export class UpCategoriaComponent implements OnInit {
   constructor(private fb:FormBuilder,
               private categoriaService:CategoriaService,
               private router : Router,
-              private route : ActivatedRoute) { }
+              private route : ActivatedRoute,
+              private empleadoService : EmpleadoService) { }
 
   ngOnInit(): void {
     this.crearFormulario();    
     this.cargarCategoria();
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
   get nombreNoValido() {
     return this.nuevaCat.get('nom_cat').invalid && this.nuevaCat.get('nom_cat').touched

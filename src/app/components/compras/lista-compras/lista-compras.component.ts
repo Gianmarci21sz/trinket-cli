@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Compra } from 'src/app/models/compra';
 import { CompraService } from 'src/app/services/compra.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
 
@@ -14,17 +15,25 @@ export class ListaComprasComponent implements OnInit {
   lista : Compra[] = [];
   constructor(private compraService:CompraService,
               private utilsService:UtilsService,
-              private router:Router) { }
+              private router:Router,
+              public empleadoService : EmpleadoService) { }
   estado : boolean = true;
   ngOnInit(): void {
     this.listarCompras();
     this.utilsService.cargarDataTable('#tablaCompras');
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   listarCompras(){
     this.compraService.listarCompras().subscribe((data:Compra[])=>{
       this.lista = data;
     });
+  }
+
+  irDetalle(id : number){
+    this.router.navigateByUrl(`menu/(opt:detCompra/${id})`);
   }
 
   editar(id:number){

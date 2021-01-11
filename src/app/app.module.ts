@@ -42,6 +42,16 @@ import { RecuperarComponent } from './components/recuperar/recuperar.component';
 import { RestablecerComponent } from './components/restablecer/restablecer.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NgxPaginationModule} from 'ngx-pagination';
+import { EditInvoiceComponent } from './components/compras/edit-invoice/edit-invoice.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { CatalogoComponent } from './components-cli/catalogo/catalogo.component';
+import { PedidoComponent } from './components-cli/pedido/pedido.component';
+import { HistorialComponent } from './components-cli/historial/historial.component';
+import { DetProductoComponent } from './components-cli/det-producto/det-producto.component';
+import { CliPerfilComponent } from './components-cli/cli-perfil/cli-perfil.component';
+import { CliRecuperarComponent } from './components-cli/cli-recuperar/cli-recuperar.component';
+import { CliReestablecerComponent } from './components-cli/cli-reestablecer/cli-reestablecer.component';
+import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
 
 
 @NgModule({
@@ -75,7 +85,17 @@ import { NgxPaginationModule} from 'ngx-pagination';
     VentasComponent,
     RecuperarComponent,
     RestablecerComponent,
-    ErrorComponent
+    ErrorComponent,
+    EditInvoiceComponent,
+    PerfilComponent,
+    CatalogoComponent,
+    PedidoComponent,
+    HistorialComponent,
+    DetProductoComponent,
+    CliPerfilComponent,
+    CliRecuperarComponent,
+    CliReestablecerComponent,
+    DetComprasComponent
   ],
   imports: [
     BrowserModule,

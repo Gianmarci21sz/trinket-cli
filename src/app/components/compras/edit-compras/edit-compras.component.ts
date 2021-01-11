@@ -5,11 +5,11 @@ import { Compra } from 'src/app/models/compra';
 import { ItemCarro } from 'src/app/models/itemCarro';
 import { Producto } from 'src/app/models/producto';
 import { CompraService } from 'src/app/services/compra.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
 declare var $ : any;
-declare var toggle : any;
 
 @Component({
   selector: 'app-edit-compras',
@@ -33,7 +33,8 @@ export class EditComprasComponent implements OnInit {
               private route:ActivatedRoute,
               private router:Router,
               private productoService:ProductoService,
-              private utilsService:UtilsService) {
+              private utilsService:UtilsService,
+              private empleadoService : EmpleadoService) {
     this.crearFormulario();
     this.cargarCompra();    
     
@@ -42,6 +43,9 @@ export class EditComprasComponent implements OnInit {
   ngOnInit(): void {   
     $('#cantPrecio').draggable();
     this.utilsService.setDefaultPositionModal('#cantPrecio');
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   cerrarModal(){

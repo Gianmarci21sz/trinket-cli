@@ -7,6 +7,7 @@ import { ProveedorService } from 'src/app/services/proveedor.service';
 import { TipoDocIdentidadService } from 'src/app/services/tipo-doc-identidad.service';
 declare var Swal : any;
 import { map } from 'rxjs/operators'
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-add-proveedor',
@@ -25,13 +26,17 @@ export class AddProveedorComponent implements OnInit {
     private proveedorService : ProveedorService,
     private router : Router,
     private route : ActivatedRoute,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private empleadoService : EmpleadoService
   ) { }
 
   ngOnInit(): void {
     this.crearFormulario();
     this.cargarCombos();    
     this.cargarPaises();
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   get contactoNoValido() {

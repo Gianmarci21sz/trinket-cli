@@ -117,6 +117,10 @@ export class EmpleadoService {
     return this.http.get<Empleado>(this.url+`buscar/${id}`,{headers:this.headers});
   }
 
+  refrescarEmpleado(id : string):Observable<Empleado>{
+    return this.http.get<Empleado>(this.url+`refrescar/${id}`,{headers:this.headers});
+  }
+
   eliminarEmpleado(id : string):Observable<boolean>{    
     return this.http.delete<boolean>(this.url+id,{headers:this.headers});
   }

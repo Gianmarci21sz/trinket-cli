@@ -21,7 +21,10 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.utilsService.cargarDataTable('#tablaCategoria');
-    this.listarCategorias();    
+    this.listarCategorias(); 
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    } 
   }
   
 

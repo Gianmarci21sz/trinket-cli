@@ -5,6 +5,7 @@ import { backrest } from 'src/app/models/backrest';
 import { BackrestService } from 'src/app/services/backrest.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { UtilsService } from 'src/app/services/utils.service';
+declare var Swal : any;
 
 @Component({
   selector: 'app-backrest',
@@ -20,6 +21,11 @@ export class BackrestComponent implements OnInit {
 
   ngOnInit(): void {    
     this.listarBackup();
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }else if(this.empleadoService.empleadolog.nombre_rol === 'Comprador'){
+      this.router.navigateByUrl('menu/(opt:listaCompras)');
+    }
   }
 
   
@@ -50,10 +56,22 @@ export class BackrestComponent implements OnInit {
   restaurar(backup : backrest){
     this.utilsService.cargaEstado = true;
     this.backrestService.restaurar(backup).subscribe((data:string)=>{      
-      this.utilsService.cargaEstado = false;      
-      this.empleadoService.cambiar();
-      alert("Sistema Restaurado, se cerrar sesion");
-      this.router.navigate(['login']);
+      this.utilsService.cargaEstado = false; 
+      this.utilsService.cambiar();
+      Swal.fire({
+        title: 'Base de datos Restaurada',
+        text: "Se cerrar la sesion para completar los cambios",
+        icon: 'success',          
+        confirmButtonText: 'OK',
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {   
+          this.empleadoService.cambiar();         
+          this.utilsService.borrar();
+          this.router.navigate(['login']);
+        }
+      });  
+      
     });
   }
 

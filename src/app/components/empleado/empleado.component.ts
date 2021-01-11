@@ -23,7 +23,12 @@ export class EmpleadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.utilsService.cargarDataTable('#tablaEmpleado');
-    this.cargarLista();    
+    this.cargarLista();  
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }else if(this.empleadoService.empleadolog.nombre_rol === 'Comprador'){
+      this.router.navigateByUrl('menu/(opt:listaCompras)');
+    }  
   }  
 
   cargarLista(){

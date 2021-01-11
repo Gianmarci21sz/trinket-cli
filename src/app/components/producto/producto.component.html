@@ -3,41 +3,50 @@
         <i class="fas fa-spinner fa-spin"></i>    
     </div>
 </div>
-
-<div class="table-responsive" *ngIf="estado">
-    <h1><b>LISTA PRODUCTOS</b></h1>
-    <button class="btn btn-outline-primary mb-3" 
-    (click)='this.router.navigateByUrl("menu/(opt:addProducto)")'>
-    <i class="fa fa-plus-circle " aria-hidden="true"></i>&nbsp;Nuevo Producto
-    </button>
-    <table class="table table-hover table-bordered table-light table-striped" width="100%" cellspacing="0" id="tablaProducto">
-        <thead class="thead-dark">
-            <tr>
-                <th hidden></th>
-                <th scope="col">N°</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let u of lista; let i =index">
-                <th scope="row">{{i+1}}</th>
-                <td hidden>{{u.id_prod}}</td>                
-                <td ><img src='http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}' style="border-radius: 0px;width: 50px;height: 50px;" alt=""></td>
-                <td>{{u.nom_prod}}</td>
-                <td>{{u.nom_cat}}</td>
-                <td>{{u.stock_prod}}</td>
-                <td>{{u.precio_unit_prod}}</td>
-                <td>
-                    <button class="btn btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(u.id_prod)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button class="btn btn-outline-danger btn-sm mr-2 mb-2"
-                        (click)="eliminar(u.id_prod,u.nom_prod)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div *ngIf="estado">
+    <h1><b>MANTENIMIENTO PRODUCTOS</b></h1>
+            <button class="btn btn-outline-primary mb-3" 
+            (click)='this.router.navigateByUrl("menu/(opt:addProducto)")'>
+            <i class="fa fa-plus-circle " aria-hidden="true"></i>&nbsp;Nuevo Producto
+            </button>
+<div class="card">
+    <div class="card-header py-3">
+        <i class="fas fa-table"></i>
+        Lista Productos
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" >            
+            <table class="table table-hover table-bordered" width="100%" cellspacing="0" id="tablaProducto">
+                <thead class="">
+                    <tr>
+                        <th hidden></th>
+                        <th style="font-weight: bold;">N°</th>
+                        <th style="font-weight: bold;">Imagen</th>
+                        <th style="font-weight: bold;">Nombre</th>
+                        <th style="font-weight: bold;">Categoria</th>
+                        <th style="font-weight: bold;">Stock</th>
+                        <th style="font-weight: bold;">Precio</th>
+                        <th style="font-weight: bold;">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let u of lista; let i =index">
+                        <td style="font-weight: bold;">{{i+1}}</td>
+                        <td hidden>{{u.id_prod}}</td>                                                             
+                        <td class="d-flex justify-content-center"><img src='http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}' style="border-radius: 0px;width: 50px;height: 50px;" alt=""></td>
+                        <td>{{u.nom_prod}}</td>
+                        <td>{{u.nom_cat}}</td>
+                        <td>{{u.stock_prod}}</td>
+                        <td>{{u.precio_unit_prod}}</td>
+                        <td>
+                            <button class="btn-floating btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(u.id_prod)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="btn-floating btn-outline-danger btn-sm mr-2 mb-2" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador'"
+                                (click)="eliminar(u.id_prod,u.nom_prod)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>

@@ -47,7 +47,7 @@
     <div class="col-lg-8 col-md-12 col-12 table-responsive p-0 ml-lg-4 ml-0 card">
         <div class="card-header mr-0">
             <h4 style="color: #EA320B;display: inline-block;" class="mt-2">Detalle Compra</h4>
-            <button type="button" class="btn btn-outline-primary float-md-right  float-lg-right  btn-sm"
+            <button *ngIf="+eCompra.est_ord_cab != 2" type="button" class="btn btn-outline-primary float-md-right  float-lg-right  btn-sm"
              data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: inline-block;"
              (click)="listarProductos()" data-bs-whatever="@getbootstrap">Agregar</button>
             

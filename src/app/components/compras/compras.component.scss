@@ -17,3 +17,6 @@
 .sd>a{
     color: #ffffff;
 }
+.custom-pagination ::ng-deep .ngx-pagination .current {
+    background: red;
+}

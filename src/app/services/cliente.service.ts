@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Cliente } from '../models/cliente';
@@ -9,10 +10,60 @@ import { Cliente } from '../models/cliente';
 })
 export class ClienteService {
   public url : string;
+  public clientelog : Cliente;    
   headers = new HttpHeaders().set('Content-Type','application/json');
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,
+              private router:Router) { 
     this.url = environment.uri+'cliente/';
+    if(localStorage.getItem("clientelog")){
+      this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
+    }else{
+      this.clientelog=null;
+    }    
   }
+
+  verificar(){
+    if(this.clientelog == null){
+      this.router.navigate(['/login']);
+    }
+  }
+
+  verificarLogin(){
+    if(this.clientelog){
+      this.router.navigateByUrl('/menu/(opt:empleado)');
+    }
+  }
+
+  expiracion(){
+    let currentDate = new Date();
+    let exp = JSON.parse(localStorage.getItem("expires"));
+    if(Date.parse(currentDate.toString()) >= Date.parse(exp)){
+      this.salir();
+    }
+  }
+
+  autenticacion(email:string,pass:string):Observable<Cliente>{          
+    return this.http.get<Cliente>(this.url+`autenticacion/${email}/${pass}`,{headers:this.headers});
+  }
+
+  guardarLocal(){
+    if(this.clientelog !=null){
+      localStorage.setItem("clientelog",JSON.stringify(this.clientelog));
+      this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
+      let expires = new Date;
+      //expires.setSeconds(expires.getSeconds()+10);
+      expires.setMinutes(expires.getMinutes()+5000);
+      localStorage.setItem("expires",JSON.stringify(expires));
+    }        
+  }
+
+  salir(){
+    localStorage.setItem("clientelog",null);    
+    this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
+    localStorage.removeItem("expires");                   
+  }
+
+  // CRUD
 
   listar():Observable<Cliente[]>{
     return this.http.get<Cliente[]>(this.url,{headers : this.headers});

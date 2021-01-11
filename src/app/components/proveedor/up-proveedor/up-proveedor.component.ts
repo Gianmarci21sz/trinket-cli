@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Proveedor } from 'src/app/models/proveedor';
 import { tipoDocIdentidad } from 'src/app/models/tipoDocIdentidad';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { TipoDocIdentidadService } from 'src/app/services/tipo-doc-identidad.service';
 declare var Swal : any;
@@ -25,13 +26,17 @@ export class UpProveedorComponent implements OnInit {
       private proveedorService : ProveedorService,
       private router : Router,
       private route : ActivatedRoute,
-      private fb : FormBuilder      
+      private fb : FormBuilder,
+      private empleadoService : EmpleadoService     
   ) { }
 
   ngOnInit(): void {
     this.crearFormulario();
     this.cargarCombos();    
-    this.cargarPaises();    
+    this.cargarPaises(); 
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    } 
   }
 
   volver(){

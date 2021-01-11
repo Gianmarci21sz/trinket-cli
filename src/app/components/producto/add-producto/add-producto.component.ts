@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 interface HtmlInputEvent extends Event {
@@ -32,14 +33,19 @@ export class AddProductoComponent implements OnInit {
   estado : boolean = false;
   
   constructor(private fb:FormBuilder,    
-    private router:Router,private categoriaService:CategoriaService,private productoService:ProductoService) {
+              private router:Router,
+              private categoriaService:CategoriaService,
+              private productoService:ProductoService,
+              private empleadoService : EmpleadoService) {
       this.crearFormulario();
       this.llenarCategorias();  
                  
   }
 
   ngOnInit(): void {      
-
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   get nombreNoValido() {

@@ -26,6 +26,16 @@ import { VentasComponent } from './components/ventas/ventas.component';
 import { RecuperarComponent } from './components/recuperar/recuperar.component';
 import { RestablecerComponent } from './components/restablecer/restablecer.component';
 import { ErrorComponent } from './components/error/error.component';
+import { EditInvoiceComponent } from './components/compras/edit-invoice/edit-invoice.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { PedidoComponent } from './components-cli/pedido/pedido.component';
+import { HistorialComponent } from './components-cli/historial/historial.component';
+import { DetProductoComponent } from './components-cli/det-producto/det-producto.component';
+import { CliReestablecerComponent } from './components-cli/cli-reestablecer/cli-reestablecer.component';
+import { CliRecuperarComponent } from './components-cli/cli-recuperar/cli-recuperar.component';
+import { CliPerfilComponent } from './components-cli/cli-perfil/cli-perfil.component';
+import { CatalogoComponent } from './components-cli/catalogo/catalogo.component';
+import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
 
 
 const routes: Routes = [
@@ -33,6 +43,13 @@ const routes: Routes = [
   { path: 'reestablecer/:codgen', component:RestablecerComponent },    
   { path: 'recuperar',component:RecuperarComponent },       
   { path: 'login', component:LoginComponent },  
+  { path: 'catalogo', component:CatalogoComponent},  
+  { path: 'cliPerfil', component:CliPerfilComponent },  
+  { path: 'recuperar', component:CliRecuperarComponent },  
+  { path: 'cliReestablecer/:codgen', component:CliReestablecerComponent },  
+  { path: 'detProducto/:id', component:DetProductoComponent },  
+  { path: 'historial', component:HistorialComponent },  
+  { path: 'pedido', component:PedidoComponent },  
   { path: 'error', component:ErrorComponent },  
   { path: 'menu', component:MenuComponent,children:[    
     { path: '',outlet:'opt', component:EmpleadoComponent, pathMatch: 'full'},    
@@ -55,8 +72,11 @@ const routes: Routes = [
     { path: 'cliente',outlet:'opt', component: ClienteComponent},
     { path: 'listaCompras',outlet:'opt', component: ListaComprasComponent},
     { path: 'listaInvoice',outlet:'opt', component: ListaInvoiceComponent},
+    { path: 'editInvoice/:id',outlet:'opt', component: EditInvoiceComponent},
     { path: 'upCompra/:id',outlet:'opt', component: EditComprasComponent},
+    { path: 'detCompra/:id',outlet:'opt', component: DetComprasComponent},
     { path: 'ventas',outlet:'opt', component: VentasComponent},
+    { path: 'perfil',outlet:'opt', component: PerfilComponent},
     { path: '**',outlet:'opt', component:EmpleadoComponent},
   ] },
   { path: '**', redirectTo: '/menu', pathMatch: 'full' },

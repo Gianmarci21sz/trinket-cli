@@ -32,4 +32,8 @@ export class InvoiceService {
   agregar(invoice : Invoice):Observable<Invoice>{
     return this.http.post<Invoice>(this.url,invoice,{headers:this.headers});
   }
+
+  editar(invoice : Invoice):Observable<Invoice>{
+    return this.http.put<Invoice>(this.url+invoice.id_invoice_cab,invoice,{headers:this.headers});
+  }
 }

@@ -41,6 +41,9 @@ export class RegistroCompraComponent implements OnInit {
     this.crearFormulario();
     this.cargarProveedores();
     this.cargarTotal();
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   get condicionInvalida(){

@@ -6,8 +6,22 @@ declare var $:any;
 })
 export class UtilsService { 
   cargaEstado : boolean = false;  
+  pendiente : boolean = false;
   constructor() {     
+    if(localStorage.getItem('pendiente')){
+      this.pendiente = JSON.parse( localStorage.getItem('pendiente'));
+    }else{
+      localStorage.setItem('pendiente',JSON.stringify(this.pendiente));
+    }
   }  
+
+  cambiar(){
+    localStorage.setItem('pendiente',JSON.stringify(!this.pendiente));
+  }
+
+  borrar(){
+    localStorage.removeItem('pendiente');
+  }
 
   cargarDataTable(tabla:string){    
     setTimeout(()=>{

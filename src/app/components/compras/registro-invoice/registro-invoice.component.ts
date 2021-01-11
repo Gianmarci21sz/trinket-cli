@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Compra } from 'src/app/models/compra';
 import { Invoice } from 'src/app/models/invoice';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
@@ -17,13 +18,16 @@ export class RegistroInvoiceComponent implements OnInit {
   invoice : Invoice ;
   constructor(private fb: FormBuilder,
     private invoiceService: InvoiceService,
-    private router: Router) {    
+    private router: Router,
+    private empleadoService : EmpleadoService) {    
     this.crearFormulario();
     this.cargarCombo();
   }
 
   ngOnInit(): void {
-
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   get OrdenCompraCabId() {

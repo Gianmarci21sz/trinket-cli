@@ -20,6 +20,9 @@ export class AppComponent implements OnInit{
 
   constructor(private router: Router,public empleadoService:EmpleadoService,
     public utilsService : UtilsService) {
+    if(utilsService.pendiente==true){
+      empleadoService.cambiar();
+    }
     setInterval(()=>{
       this.empleadoService.expiracion();      
     },5000);

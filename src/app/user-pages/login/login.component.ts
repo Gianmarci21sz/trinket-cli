@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb:FormBuilder,
               private empleadoService:EmpleadoService,
               private router:Router,
-              private route : ActivatedRoute) {
+              private route : ActivatedRoute,
+              private utilsService : UtilsService) {
     this.crearFormulario();
     this.empleadoService.verificarLogin();       
   }
@@ -73,20 +75,25 @@ export class LoginComponent implements OnInit {
               allowOutsideClick: false
             }).then((result) => {
               if (result.isConfirmed) {    
+                this.utilsService.borrar();
                 this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
                 +' '+this.empleadoService.empleadolog.ape_emp);  
                 if(this.empleadoService.empleadolog.nombre_rol === 'Administrador'){
                   this.router.navigateByUrl('/menu/(opt:empleado)');
                 }else if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
-                  this.router.navigateByUrl('/menu/(opt:cliente)');
+                  this.router.navigateByUrl('/menu/(opt:ventas)');
                 }else if (this.empleadoService.empleadolog.nombre_rol === 'Comprador'){
-                  this.router.navigateByUrl('/menu/(opt:producto)');
+                  this.router.navigateByUrl('/menu/(opt:listaCompras)');
                 }
               }
             }); 
           }                
         }else{
-          alert('Error contraseña o email');
+          Swal.fire(
+            'Error',
+            'Correo o contraseña incorrecto.',
+            'error'
+          )
         }
     },err=>{
       console.log(err);

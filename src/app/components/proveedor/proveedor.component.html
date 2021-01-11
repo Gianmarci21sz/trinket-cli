@@ -3,38 +3,48 @@
         <i class="fas fa-spinner fa-spin"></i>    
     </div>
 </div>
-<div class="table-responsive" *ngIf="estado">
-    <h1><b>LISTA PROVEEDORES</b></h1>
+<div *ngIf="estado">
+    <h1><b>MANTENIMIENTO PROVEEDORES</b></h1>
     <button class="btn btn-outline-primary mb-3" 
     (click)='this.router.navigateByUrl("menu/(opt:addProveedor)")'>
     <i class="fa fa-plus-circle " aria-hidden="true"></i>&nbsp;Nuevo Proveedor
     </button>
-    <table class="table table-hover table-bordered table-light table-striped" width="100%" cellspacing="0" id="tablaProveedor"> 
-        <thead class="thead-dark">
-            <tr>
-                <th>N°</th>
-                <th>Razon</th>
-                <th>N° documento</th>
-                <th>Correo</th>
-                <th>Contacto</th>
-                <th>Pais</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let p of listaProveedores;let i = index">
-                <td>{{i+1}}</td>
-                <td>{{p.razon_prov}}</td>
-                <td>{{p.num_doc_prov}}</td>
-                <td>{{p.correo_prov}}</td>
-                <td>{{p.contact_prov}}</td>
-                <td>{{p.pais_prov}}</td>
-                <td>
-                    <button class="btn btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(p.id_prov)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button class="btn btn-outline-danger btn-sm mr-2 mb-2"
-                        (click)="eliminar(p.id_prov,p.razon_prov)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header py-3">
+            <i class="fas fa-table"></i>
+            Lista Proveedores
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">                
+                <table class="table table-hover table-bordered" width="100%" cellspacing="0" id="tablaProveedor"> 
+                    <thead>
+                        <tr>
+                            <th style="font-weight: bold;">N°</th>
+                            <th style="font-weight: bold;">Razon</th>
+                            <th style="font-weight: bold;">N° documento</th>
+                            <th style="font-weight: bold;">Correo</th>
+                            <th style="font-weight: bold;">Contacto</th>
+                            <th style="font-weight: bold;">Pais</th>
+                            <th style="font-weight: bold;">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of listaProveedores;let i = index">
+                            <td style="font-weight: bold;">{{i+1}}</td>
+                            <td>{{p.razon_prov}}</td>
+                            <td>{{p.num_doc_prov}}</td>
+                            <td>{{p.correo_prov}}</td>
+                            <td>{{p.contact_prov}}</td>
+                            <td>{{p.pais_prov}}</td>
+                            <td>
+                                <button class="btn btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(p.id_prov)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-outline-danger btn-sm mr-2 mb-2"
+                                    (click)="eliminar(p.id_prov,p.razon_prov)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

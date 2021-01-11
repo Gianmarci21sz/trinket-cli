@@ -10,4 +10,5 @@ export interface Producto {
     nom_cat?:         string;
     nom_producto?:    string;
     gm_ref?:          number;
+    cant_img?:        number;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
@@ -15,13 +16,17 @@ export class ProductoComponent implements OnInit {
   estado : boolean = false;
   constructor(private productoService:ProductoService,
               private utilsService : UtilsService,
-              public router:Router) { 
+              public router:Router,
+              public empleadoService : EmpleadoService) { 
         
   }
 
   ngOnInit(): void {   
     this.utilsService.cargarDataTable('#tablaProducto');
     this.cargarLista();     
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   buscar(){

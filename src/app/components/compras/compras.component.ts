@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { ItemCarro } from 'src/app/models/itemCarro';
 import { Producto } from 'src/app/models/producto';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { CompraService } from 'src/app/services/compra.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UtilsService } from 'src/app/services/utils.service';
 declare var $: any;
@@ -24,17 +26,23 @@ export class ComprasComponent implements OnInit {
   estado: boolean = false;
   precio: number;
   cantidad: number;
-  pageActual : number = 1;  
+  pageActual : number = 1; 
+  show : boolean = false; 
   constructor(private productoService: ProductoService,
     public compraService: CompraService,
     private categoriaService: CategoriaService,
-    private utilsService:UtilsService) { }
+    private utilsService:UtilsService,
+    private empleadoService : EmpleadoService,
+    private router : Router) { }
 
   ngOnInit(): void {
     this.listarProductos();
     this.cargarCategorias();
     $('#cantPrecio').draggable();
     this.utilsService.setDefaultPositionModal('#cantPrecio');
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   cargarCategorias() {

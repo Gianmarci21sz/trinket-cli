@@ -3,41 +3,51 @@
         <i class="fas fa-spinner fa-spin"></i>    
     </div>
 </div>
-<div class="table-responsive" *ngIf="estado">
-    <h1><b>LISTA EMPLEADOS</b></h1>
+<div *ngIf="estado">
+    <h1><b>MANTENIMIENTO EMPLEADOS</b></h1>
     <button class="btn btn-outline-primary mb-3" 
     (click)='this.router.navigateByUrl("menu/(opt:formEmpleado)")'>
     <i class="fa fa-plus-circle " aria-hidden="true"></i>&nbsp;Nuevo Empleado
-    </button>    
-    <table class="table table-hover table-bordered table-light table-striped" width="100%" cellspacing="0" id="tablaEmpleado">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">N°</th>
-                <th hidden></th>                
-                <th scope="col">Nombres</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">N° Documento</th>
-                <th scope="col">Email</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let u of lista; let i =index">
-                <th scope="row">{{i+1}}</th>
-                <td hidden>{{u.id_emp}}</td>                
-                <td>{{u.nom_emp}}</td>
-                <td>{{u.ape_emp}}</td>
-                <td>{{u.num_doc_emp}}</td>
-                <td>{{u.email}}</td>
-                <td>{{u.nombre_rol}}</td>
-                <td>
-                    <button class="btn btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(u.id_emp)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                    <button class="btn btn-outline-danger btn-sm mr-2 mb-2"
-                        (click)="eliminar(u.id_emp,u.nom_emp+' '+u.ape_emp)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
+    </button> 
+    <div class="card">
+        <div class="card-header py-3">
+            <i class="fas fa-table"></i>
+            Lista Empleados
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" >                   
+                <table class="table table-hover table-bordered" width="100%" cellspacing="0" id="tablaEmpleado">
+                    <thead>
+                        <tr>
+                            <th style="font-weight: bold;">N°</th>
+                            <th hidden></th>                
+                            <th style="font-weight: bold;">Nombres</th>
+                            <th style="font-weight: bold;">Apellidos</th>
+                            <th style="font-weight: bold;">N° Documento</th>
+                            <th style="font-weight: bold;">Email</th>
+                            <th style="font-weight: bold;">Rol</th>
+                            <th style="font-weight: bold;">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let u of lista; let i =index">
+                            <th style="font-weight: bold;">{{i+1}}</th>
+                            <td hidden>{{u.id_emp}}</td>                
+                            <td>{{u.nom_emp}}</td>
+                            <td>{{u.ape_emp}}</td>
+                            <td>{{u.num_doc_emp}}</td>
+                            <td>{{u.email}}</td>
+                            <td>{{u.nombre_rol}}</td>
+                            <td>
+                                <button class="btn btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(u.id_emp)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-outline-danger btn-sm mr-2 mb-2"
+                                    (click)="eliminar(u.id_emp,u.nom_emp+' '+u.ape_emp)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
 </div>

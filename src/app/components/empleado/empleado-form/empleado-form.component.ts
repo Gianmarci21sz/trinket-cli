@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵSWITCH_TEMPLATE_REF_FACTORY__POST_R3__ } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
@@ -6,6 +6,7 @@ import { tipoDocIdentidad } from 'src/app/models/tipoDocIdentidad';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { TipoDocIdentidadService } from 'src/app/services/tipo-doc-identidad.service';
+import { UtilsService } from 'src/app/services/utils.service';
 import { Rol } from '../../../models/rol';
 declare var Swal: any;
 
@@ -40,7 +41,8 @@ export class EmpleadoFormComponent implements OnInit {
     private empleadoService : EmpleadoService,
     private router : Router,
     private route : ActivatedRoute,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private utilsService : UtilsService
   ) { 
     this.crearFormulario();
     this.cargarCombos(); 
@@ -48,7 +50,11 @@ export class EmpleadoFormComponent implements OnInit {
   }
 
   ngOnInit(): void {           
-      
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }else if(this.empleadoService.empleadolog.nombre_rol === 'Comprador'){
+      this.router.navigateByUrl('menu/(opt:listaCompras)');
+    }
   }
 
   get nombreNoValido() {
@@ -207,9 +213,20 @@ export class EmpleadoFormComponent implements OnInit {
             }else{
               this.empleadoService.actualizarEmpleado(this.empleado).subscribe((data:Empleado)=>{                
                 if(+this.empleadoService.empleadolog.id_emp===+data.id_emp){
-                  alert("Se cerrara sesion para guardar los cambios");
-                  this.empleadoService.cambiar();
-                  this.router.navigate(['login']);
+                  this.utilsService.cambiar();
+                  Swal.fire({
+                    title: 'Guardando Cambios',
+                    text: "Se cerrara la sesion para guardar los cambios",
+                    icon: 'success',          
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false
+                  }).then((result) => {
+                    if (result.isConfirmed) {    
+                      this.empleadoService.cambiar();
+                      this.utilsService.borrar();
+                      this.router.navigate(['login']);
+                    }
+                  }); 
                 }else{
                   this.router.navigateByUrl('/menu/(opt:empleado)');
                 }

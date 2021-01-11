@@ -17,7 +17,7 @@
                         <label for="">ID Compra</label>
                         <select class="custom-select" formControlName="ord_comp_cab_id" #cpro (change)="compraProveedor(cpro.value)">
                             <option value="{{com.id_ord_comp_cab}}" *ngFor="let com of listaCompras">
-                                {{com.num_ord_cab}}
+                                {{com.id_ord_comp_cab}}
                             </option>
                         </select>
                         <small *ngIf="OrdenCompraCabId" class="text-danger">

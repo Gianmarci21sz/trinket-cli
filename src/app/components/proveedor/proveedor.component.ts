@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Proveedor } from 'src/app/models/proveedor';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
@@ -15,12 +16,15 @@ export class ProveedorComponent implements OnInit {
   estado : boolean = false;
   constructor(private proveedorService : ProveedorService,
               private utilsService : UtilsService,
-              public router : Router) { }
+              public router : Router,
+              private empleadoService : EmpleadoService) { }
 
   ngOnInit(): void {    
     this.utilsService.cargarDataTable('#tablaProveedor');
     this.listarProveedores();
-    
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   listarProveedores(){

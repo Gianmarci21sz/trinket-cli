@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 declare var Swal : any;
 
 @Component({
@@ -16,10 +17,14 @@ export class AddCategoriaComponent implements OnInit {
   categoria : Categoria;
   constructor(private fb:FormBuilder,
               private categoriaService:CategoriaService,
-              private router: Router) { }
+              private router: Router,
+              private empleadoService : EmpleadoService) { }
 
   ngOnInit(): void {
-    this.crearFormulario();    
+    this.crearFormulario();  
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   get nombreNoValido() {

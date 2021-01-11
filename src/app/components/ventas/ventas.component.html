@@ -3,36 +3,46 @@
         <i class="fas fa-spinner fa-spin"></i>    
     </div>
 </div>
-<div class="table-responsive">
+<div *ngIf="estado">
     <h1><b>LISTA VENTAS</b></h1>
-    <table class="table table-hover table-light table-bordered table-striped" width="100%" cellspacing="0" id="tablaVentas">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Fecha Venta</th>
-                <th>Fecha Entrega</th>
-                <th>Cliente</th>
-                <th>N° transaccion</th>
-                <th>Comprobante</th>                
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let venta of lista">
-                <td>{{venta.id_vent_cab}}</td>
-                <td>{{venta.fecha_vent_cab | date : 'dd/MM/yyyy'}} {{venta.fecha_vent_cab | date : 'HH:mm:ss'}}</td>
-                <td>{{venta.fecha_entr_cab}}</td>
-                <td>{{venta.nom_cli}}</td>
-                <td>{{venta.num_trans_cab}}</td>
-                <td class="pl-0">
-                    <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'FACTURA'" target="_blank"
-                    href="http://192.168.1.13:8084/Trinket-Reporte/ventaController?accion=factura&codigoVenta={{venta.id_vent_cab}}"
-                    class="ml-4 btn btn-sm btn-outline-dark" >Generar</a>
-                    <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'BOLETA'" target="_blank"
-                    href="http://192.168.1.13:8084/Trinket-Reporte/ventaController?accion=boleta&codigoVenta={{venta.id_vent_cab}}"
-                    class="ml-4 btn btn-sm btn-outline-dark" >Generar</a>
-                    <button *ngIf="venta.fecha_entr_cab===null" class="ml-4 btn btn-sm btn-outline-dark" disabled>Generar</button>
-                </td>                
-            </tr>
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header py-3">
+            <i class="fas fa-table"></i>
+            Lista Ventas
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" >                
+                <table class="table table-hover  table-bordered" width="100%" cellspacing="0" id="tablaVentas">
+                    <thead >
+                        <tr>
+                            <th style="font-weight: bold;">ID</th>
+                            <th style="font-weight: bold;">Fecha Venta</th>
+                            <th style="font-weight: bold;">Fecha Entrega</th>
+                            <th style="font-weight: bold;">Cliente</th>
+                            <th style="font-weight: bold;">N° transaccion</th>
+                            <th style="font-weight: bold;">Comprobante</th>                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let venta of lista">
+                            <td style="font-weight: bold;">{{venta.id_vent_cab}}</td>
+                            <td>{{venta.fecha_vent_cab | date : 'dd/MM/yyyy'}} {{venta.fecha_vent_cab | date : 'HH:mm:ss'}}</td>
+                            <td>{{venta.fecha_entr_cab}}</td>
+                            <td>{{venta.nom_cli}}</td>
+                            <td>{{venta.num_trans_cab}}</td>
+                            <td class="pl-0">
+                                <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'FACTURA'" target="_blank"
+                                href="http://192.168.1.13:8084/Trinket-Reporte/comprobanteController?accion=factura&codigoVenta={{venta.id_vent_cab}}"
+                                class="ml-4 btn btn-sm btn-outline-dark" >Generar</a>
+                                <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'BOLETA'" target="_blank"
+                                href="http://192.168.1.13:8084/Trinket-Reporte/comprobanteController?accion=boleta&codigoVenta={{venta.id_vent_cab}}"
+                                class="ml-4 btn btn-sm btn-outline-dark" >Generar</a>
+                                <button *ngIf="venta.fecha_entr_cab===null" class="ml-4 btn btn-sm btn-outline-dark" disabled>Generar</button>
+                            </td>                
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

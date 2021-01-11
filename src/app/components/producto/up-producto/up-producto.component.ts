@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { max } from 'rxjs/operators';
+import { max, switchAll } from 'rxjs/operators';
 import { Categoria } from 'src/app/models/categoria';
 import { Imagenes } from 'src/app/models/imagenes';
 import { Producto } from 'src/app/models/producto';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
+declare var Swal : any;
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -48,14 +50,18 @@ export class UpProductoComponent implements OnInit {
               private route:ActivatedRoute,
               private productoService:ProductoService,
               private categoriaService:CategoriaService,
-              private fb:FormBuilder) { 
+              private fb:FormBuilder,
+              private empleadoService : EmpleadoService) { 
         this.crearFormulario();     
         this.llenarCategorias();                        
         
   }
 
   ngOnInit(): void { 
-    this.cargarProducto();   
+    this.cargarProducto();  
+    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+      this.router.navigateByUrl('menu/(opt:ventas)');
+    }
   }
 
   volver(){
@@ -153,7 +159,9 @@ export class UpProductoComponent implements OnInit {
         this.productoService.actualizarImagen(this.imagenesArr[2].id_imagen,this.file3).subscribe(data=>{},err=>{});
         this.productoService.actualizarImagen(this.imagenesArr[3].id_imagen,this.file4).subscribe(data=>{},err=>{});
         this.productoService.actualizarImagen(this.imagenesArr[4].id_imagen,this.file5)
-        .subscribe(data=>{this.router.navigateByUrl('/menu/(opt:producto)');},
+        .subscribe((data)=>{          
+          this.router.navigateByUrl('/menu/(opt:producto)');          
+        },
           err=>{});
       });
     }
@@ -165,7 +173,7 @@ export class UpProductoComponent implements OnInit {
       nom_prod : this.nuevoProd.get('nom_prod').value,
       descrip_prod : this.nuevoProd.get('descrip_prod').value,
       precio_unit_prod : this.nuevoProd.get('precio_unit_prod').value,
-      stock_prod : 0,
+      stock_prod : this.producto.stock_prod,
       nota_prod : this.nuevoProd.get('nota_prod').value,
       estado_prod : '1',
       id_cat : this.nuevoProd.get('id_cat').value        

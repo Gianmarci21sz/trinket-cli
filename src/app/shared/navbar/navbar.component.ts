@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ItemCarro } from 'src/app/models/itemCarro';
 import { CompraService } from 'src/app/services/compra.service';
@@ -19,7 +20,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(config: NgbDropdownConfig,public empleadoService:EmpleadoService,
               public compraService:CompraService,
-              public utilsService:UtilsService) {
+              public utilsService:UtilsService,
+              public router : Router) {
     config.placement = 'bottom-right';
     if(localStorage.getItem('sidebar')){
       this.v = JSON.parse(localStorage.getItem('sidebar'));
