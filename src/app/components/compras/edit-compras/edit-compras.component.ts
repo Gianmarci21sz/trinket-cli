@@ -36,7 +36,7 @@ export class EditComprasComponent implements OnInit {
               private utilsService:UtilsService,
               private empleadoService : EmpleadoService) {
     this.crearFormulario();
-    this.cargarCompra();    
+    this.cargarCompra();     
     
   }
 
@@ -87,7 +87,7 @@ export class EditComprasComponent implements OnInit {
         this.listarProductos();
         this.precio = null;
         this.cantidad = null;
-        $('#cantPrecio .close').click();
+        $('#cantPrecio .close').click();        
         Swal.fire(
           'Añadido',
           '',
@@ -127,13 +127,34 @@ export class EditComprasComponent implements OnInit {
   aumentar(prod:ItemCarro){    
     if(+prod.cant_ord_det === 0 || +prod.cant_ord_det === null){
       prod.cant_ord_det=1;
-    }    
+    }
+    if(+prod.cant_ord_det >999 ){
+      prod.cant_ord_det=999;
+    }
+    let cambio = this.listaDetalle.indexOf(prod);
+    this.listaDetalle[cambio].cant_ord_det =prod.cant_ord_det;
+    this.listaDetalle[cambio].amount_ord_det =this.listaDetalle[cambio].unit_price_ord_det * this.listaDetalle[cambio].cant_ord_det;
+    for(let det of this.listaDetalle){
+      this.compraService.upDetalleCantidad(+det.ord_comp_det,+det.cant_ord_det,+det.unit_price_ord_det)
+      .subscribe((data:boolean)=>{            
+      });
+    }
+    this.cargarTotal();    
   }
 
   aumentarPrecio(prod:ItemCarro){
     if(+prod.unit_price_ord_det === 0 || +prod.unit_price_ord_det === null){
       prod.unit_price_ord_det=1;
-    }   
+    }    
+    let cambio = this.listaDetalle.indexOf(prod);
+    this.listaDetalle[cambio].cant_ord_det =prod.cant_ord_det;
+    this.listaDetalle[cambio].amount_ord_det =this.listaDetalle[cambio].unit_price_ord_det * this.listaDetalle[cambio].cant_ord_det;
+    for(let det of this.listaDetalle){
+      this.compraService.upDetalleCantidad(+det.ord_comp_det,+det.cant_ord_det,+det.unit_price_ord_det)
+      .subscribe((data:boolean)=>{            
+      });
+    }
+    this.cargarTotal();
   }
 
   eliminar(id : number,producto:string){
@@ -190,14 +211,19 @@ export class EditComprasComponent implements OnInit {
     }
   }
 
+  cargarTotal(){
+    this.total =0;
+    for(let ld of this.listaDetalle){
+      this.total = +this.total + +ld.amount_ord_det;
+    }
+  }
+
   cargarDetalle(id : number){
     this.compraService.buscarDetalleCompra(id).subscribe((detalle:ItemCarro[])=>{          
       this.listaDetalle = detalle;          
       this.estado = true;
       this.total = 0;
-      for(let ld of this.listaDetalle){
-        this.total = +this.total + +ld.amount_ord_det;
-      }
+      this.cargarTotal();
     });
   }
 

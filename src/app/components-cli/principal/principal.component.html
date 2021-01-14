@@ -1,6 +1,7 @@
+<div class="row">
 
   <!--Carousel Wrapper-->
-  <div class="carousel slide mt-3" id="principal-carousel" data-ride="carousel">
+  <div class="carousel slide mt-3 col-md-12" id="principal-carousel" data-ride="carousel">
     <div class="carousel-inner p-0">
       <div class="carousel-item active row p-0 m-0" style="position: relative;">
         <div style="height: 40px;background: black;position: absolute;"></div>
@@ -9,124 +10,145 @@
     </div>
   </div>
   <!--/.Carousel Wrapper-->
+  <div class="col-md-12 px-5 mt-3">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg  mt-3 mb-5" style="background: #EA320B;">
 
-  <main>
-    <div class="mx-5">
-      <div class="alert fade show d-flex justify-content-center align-items-center" role="alert"
-        *ngIf="compraService.agregado"
-        style="width: 100%;height: 40px;margin-top: 0px;text-align: center;background: #5cb85c;">
-        <strong>Producto agregado!</strong>
-      </div>
-      <!--Navbar-->
-      <nav class="navbar navbar-expand-lg  mt-3 mb-5" style="background: #EA320B;">
+      <!-- Navbar brand -->
+      <span class="navbar-brand" style="color: #ffffff;">Categorias:</span>
 
-        <!-- Navbar brand -->
-        <span class="navbar-brand" style="color: #ffffff;">Categorias:</span>
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" (click)="show=!show">
+        <i class="fas fa-bars" style="color: #ffffff;"></i>
+      </button>
 
-        <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" (click)="show=!show">
-          <i class="fas fa-bars" style="color: #ffffff;"></i>
-        </button>
+      <!-- Collapsible content -->
 
-        <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="basicExampleNav" [ngClass]="{'show' : show}">
 
-        <div class="collapse navbar-collapse" id="basicExampleNav" [ngClass]="{'show' : show}">
-
-          <!-- Links -->
-          <ul class="navbar-nav mr-auto" style="color: #ffffff;">
-            <li class="nav-item as">
-              <a class="nav-link" (click)="listarProductos()" [ngClass]="{'seleccionado': seleccionado === 0}">Todos
-              </a>
-            </li>
-            <li class="nav-item as" [ngClass]="{'seleccionado': seleccionado === c.id_cat}"
-              *ngFor="let c of listaCategoria;let i = index;">
-              <a class="nav-link" *ngIf="i<7" (click)="filtrarXcat(c.id_cat)">{{c.nom_cat}}
-              </a>
-            </li>
-            <li class="nav-item nav-profile dropdown" ngbDropdown>
-              <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
-                otros
-              </a>
-              <ul class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown"
-                style="background: #EA320B;">
-                <li [ngClass]="{'seleccionado': seleccionado === c.id_cat}" class="sd"
-                  *ngFor="let c of listaCategoria;let i =index">
-                  <a class="dropdown-item" *ngIf="i>=7" (click)="filtrarXcat(c.id_cat)">
-                    {{c.nom_cat}}
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <!-- Links -->
-
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}"
-                (keyup)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
-            </div>
-          </form>
-        </div>
-        <!-- Collapsible content -->
-
-      </nav>
-      <!--/.Navbar-->
-
-      <!--Section: Products v.3-->
-      <section class="text-center mb-4">
-        <!--Grid row-->
-        <div class="row wow fadeIn">
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4"
-            *ngFor="let u of listaFiltroTexto | paginate: {itemsPerPage : 12, currentPage : pageActual}"
-            [ngStyle]="{'display':u.stock_prod == 0 || u.cant_img != 5 ? 'none' : '' }">
-            <!--Card-->
-            <div class="card ">
-              <!--Card image-->
-              <div class="view overlay py-3 px-auto">
-                <div>
-                  <img style="height: 200px;width: 200px;"
-                    src="http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}"
-                    class="card-img-top mx-auto" alt="">
-                </div>
-                <a>
-                  <div class="mask rgba-white-slight"></div>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto" style="color: #ffffff;">
+          <li class="nav-item as">
+            <a class="nav-link" (click)="listarProductos()" [ngClass]="{'seleccionado': seleccionado === 0}">Todos
+            </a>
+          </li>
+          <li class="nav-item as" [ngClass]="{'seleccionado': seleccionado === c.id_cat}"
+            *ngFor="let c of listaCategoria;let i = index;">
+            <a class="nav-link" *ngIf="i<7" (click)="filtrarXcat(c.id_cat)">{{c.nom_cat}}
+            </a>
+          </li>
+          <li class="nav-item nav-profile dropdown" ngbDropdown>
+            <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
+              otros
+            </a>
+            <ul class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown"
+              style="background: #EA320B;">
+              <li [ngClass]="{'seleccionado': seleccionado === c.id_cat}" class="sd"
+                *ngFor="let c of listaCategoria;let i =index">
+                <a class="dropdown-item" *ngIf="i>=7" (click)="filtrarXcat(c.id_cat)">
+                  {{c.nom_cat}}
                 </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- Links -->
+
+        <form class="form-inline">
+          <div class="md-form my-0">
+            <input class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}"
+              (keyup)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
+          </div>
+        </form>
+      </div>
+      <!-- Collapsible content -->
+
+    </nav>
+    <!--/.Navbar-->
+
+    <!--Section: Products v.3-->
+    <section class="text-center mb-4 listaproductos">
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4"
+          *ngFor="let u of listaFiltroTexto | paginate: {itemsPerPage : 12, currentPage : pageActual}"
+          [ngStyle]="{'display':u.stock_prod == 0 || u.cant_img != 5 ? 'none' : '' }">
+          <!--Card-->
+          <div class="card">
+            <!--Card image-->
+            <div class="view overlay py-3 px-auto">
+              <div>
+                <img style="height: 200px;width: 200px;"
+                  src="http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}" class="card-img-top mx-auto"
+                  alt="">
               </div>
-              <!--Card image-->
+              <a>
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!--Card image-->
 
-              <!--Card content-->
-              <div class="card-body text-center pt-0 pb-3">
-                <!--Category & Title-->
-                <h5 class="grey-text">{{u.nom_cat}}</h5>
+            <!--Card content-->
+            <div class="card-body text-center pt-0 pb-3">
+              <!--Category & Title-->
+              <h5 class="grey-text ">{{u.nom_cat}}</h5>
 
-                <h5>
-                  <strong class="dark-grey-text">
-                    {{u.nom_prod}}
-                    <!--<span class="badge badge-pill danger-color">NEW</span>-->
+              <h5>
+                <strong class="dark-grey-text">
+                  {{u.nom_prod}}
+                  <!--<span class="badge badge-pill danger-color">NEW</span>-->
 
-                  </strong>
-                </h5>
-                <h4 class="font-weight-bold red-text">
-                  <strong>S/. {{u.precio_unit_prod | number:'0.1-5'}} </strong>
-                </h4>
-                <button type="button" class="btn btn-outline-primary btn-block px-3" data-bs-toggle="modal"
-                  data-bs-target="#cantPrecio" (click)="agregar(u)" data-bs-whatever="@getbootstrap">
-                  Añadir</button>
-
-              </div>
-              <!--Card content-->
+                </strong>
+              </h5>
+              <h4 class="font-weight-bold red-text">
+                <strong>S/. {{u.precio_unit_prod | number:'0.1-5'}} </strong>
+              </h4>
+              <button type="button" class="btn btn-outline-primary btn-block px-3" (click)="agregar(u)" >
+                Añadir</button>
 
             </div>
-            <!--Card-->
-          </div>
-          <!--Grid column-->
-        </div>
-        <!--Grid row-->
-        <pagination-controls class="custom-pagination" previousLabel="Anterior" nextLabel="Siguiente" responsive="true"
-          (pageChange)="pageActual = $event"></pagination-controls>
-      </section>
-      <!--Section: Products v.3-->
+            <!--Card content-->
 
-    </div>
-  </main>
+          </div>
+          <!--Card-->
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+      <pagination-controls class="custom-pagination" previousLabel="Anterior" nextLabel="Siguiente" responsive="true"
+        (pageChange)="pageActual = $event"></pagination-controls>
+    </section>
+    <!--Section: Products v.3-->
+
+  </div>
+
+</div>
+<div class="alert fade show d-flex justify-content-center align-items-center fixed-bottom ml-3" role="alert" *ngIf="agregado"
+  style="width: 20%;height: 40px;text-align: center;background: #EA320B;">
+  <strong>Producto agregado!</strong>
+</div>
+<footer class="page-footer text-center font-small mt-4 wow fadeIn" style="position:relative; width:100%">
+
+  <hr class="my-4">
+
+  <!-- Social icons -->
+  <div class="pb-4">
+    <a href="https://www.facebook.com/TrinketCludSales" target="_blank">
+      <i style="color: #EA320B;" class="fab fa-facebook fa-lg mr-3"></i>
+    </a>
+
+    <a (click)="whatsapp()">
+      <i style="color: #EA320B;" class="fab fa-whatsapp fa-lg mr-3"></i>
+    </a>
+  </div>
+  <!-- Social icons -->
+
+  <!--Copyright-->
+  <div class="footer-copyright py-3">
+    © 2021 Copyright:
+    <a (click)="router.navigateByUrl('catalogo')"> Trinket Cloud Sales </a>
+  </div>
+  <!--/.Copyright-->
+
+</footer>

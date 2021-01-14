@@ -110,13 +110,16 @@ export class RegistroCompraComponent implements OnInit {
   cargarTotal(){
     this.total = 0;
     for(let it of this.compraService.items){
-      this.total = +this.total + +it.amount_ord_det;
+      this.total = this.total + +it.amount_ord_det;
     }
   }
 
   aumentar(id:number,indice:number){    
     if(+this.cajas[indice]===0 || +this.cajas[indice]===null){
       this.cajas[indice]=1;
+    }
+    if(+this.cajas[indice] >999 ){
+      this.cajas[indice]=999;
     }
     this.compraService.aumentar(+id,+this.cajas[indice]);
     this.cargarTotal();

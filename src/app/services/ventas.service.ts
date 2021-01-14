@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ItemCarroCli } from '../models/itemCarroCli';
 import { Venta } from '../models/venta';
 
 @Injectable({
@@ -16,4 +15,8 @@ export class VentasService {
   listar():Observable<Venta[]>{
     return this.http.get<Venta[]>(this.url,{headers:this.headers});
   }  
+
+  listarXcli(id : number):Observable<Venta[]>{
+    return this.http.get<Venta[]>(this.url+`ventasXcliente/${id}`,{headers:this.headers});
+  }
 }

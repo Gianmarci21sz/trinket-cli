@@ -48,29 +48,29 @@
                 </div>   
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">Country</label>
-                        <input style="color: black;" type="text" disabled [class.is-invalid]="conuntryCab" class="form-control" placeholder="Country" formControlName='country_cab' >
+                        <label for="">País</label>
+                        <input style="color: black;" type="text" disabled [class.is-invalid]="conuntryCab" class="form-control" placeholder="Pais" formControlName='country_cab' >
                         <small *ngIf="conuntryCab" class="text-danger">
                             Campo invalido
                           </small>
                     </div> 
                     <div class="form-group">
-                        <label for="">N° Consigned</label>
-                        <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numConsignedCab" class="form-control" placeholder="N° consigned" formControlName='num_consigned_cab' >
+                        <label for="">N° Consignado</label>
+                        <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numConsignedCab" class="form-control" placeholder="N° Consignado" formControlName='num_consigned_cab' >
                         <small *ngIf="numConsignedCab" class="text-danger">
                             Campo invalido
                           </small>
                     </div> 
                     <div class="form-group">
-                        <label for="">State</label>
-                        <input type="text" [class.is-invalid]="staateCab" class="form-control" placeholder="State Cab" formControlName='state_cab' >
+                        <label for="">Estado</label>
+                        <input type="text" [class.is-invalid]="staateCab" class="form-control" placeholder="Estado" formControlName='state_cab' >
                         <small *ngIf="staateCab" class="text-danger">
                             Campo invalido
                           </small>
                     </div> 
                     <div class="form-group">
-                        <label for="">Terms Pay</label>
-                        <input type="text" [class.is-invalid]="termsPayCab" class="form-control" placeholder="Terms Pay Cab" formControlName='terms_pay_cab' >
+                        <label for="">Terminos de pago</label>
+                        <input type="text" [class.is-invalid]="termsPayCab" class="form-control" placeholder="Terminos de pago" formControlName='terms_pay_cab' >
                         <small *ngIf="termsPayCab" class="text-danger">
                             Campo invalido
                           </small>

@@ -109,36 +109,45 @@
                 <form [formGroup]="cambioContra">
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Contraseña actual:</label>                         
-                        <div class="input-group mb-3">
-                            <input  [type]="isblock1 ? 'password' : 'text'" class="form-control pl-3" id="pass1" formControlName="pass1">
+                        <div class="input-group mb-0">
+                            <input [class.is-invalid]="pass1NoValido" [type]="isblock1 ? 'password' : 'text'" class="form-control pl-3" id="pass1" formControlName="pass1">
                             <div class="input-group-prepend" (click)="ocultar(1)">
                                 <div class="input-group-text px-3 press" style="background: #EA320B;">
                                     <span  class="fa icon" [class]="isblock1 ? 'fa-eye-slash' : 'fa-eye'"></span>
                                 </div>
                             </div>
-                        </div>                        
+                        </div> 
+                        <small *ngIf="pass1NoValido" class="text-danger">
+                            Campo invalido
+                        </small>                       
                     </div>
                     <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Nueva contraseña:</label>                       
-                        <div class="input-group mb-3">
-                            <input  [type]="isblock2 ? 'password' : 'text'" class="form-control pl-3" id="pass2" formControlName="pass2">
+                        <label for="message-text" class="col-form-label">Nueva contraseña (tamaño min 8):</label>                       
+                        <div class="input-group mb-0">
+                            <input [class.is-invalid]="pass2NoValido" [type]="isblock2 ? 'password' : 'text'" class="form-control pl-3" id="pass2" formControlName="pass2">
                             <div class="input-group-prepend" (click)="ocultar(2)">
                                 <div class="input-group-text px-3 press" style="background: #EA320B;">
                                     <span  class="fa icon" [class]="isblock2 ? 'fa-eye-slash' : 'fa-eye'"></span>
                                 </div>
                             </div>
                         </div>
+                        <small *ngIf="pass2NoValido" class="text-danger">
+                            La contraseña debe tener Mayúsculas, Minúsculas, Dígito y Símbolo
+                        </small>   
                     </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label">Confirmar contraseña:</label>
+                    <div class="mb-0">
+                        <label for="message-text" class="col-form-label">Confirmar contraseña (tamaño min 8):</label>
                         <div class="input-group mb-3">
-                            <input  [type]="isblock3 ? 'password' : 'text'" class="form-control pl-3" id="pass3" formControlName="pass3">
+                            <input [class.is-invalid]="pass3NoValido" [type]="isblock3 ? 'password' : 'text'" class="form-control pl-3" id="pass3" formControlName="pass3">
                             <div class="input-group-prepend" (click)="ocultar(3)">
                                 <div class="input-group-text px-3 press" style="background: #EA320B;">
                                     <span  class="fa icon" [class]="isblock3 ? 'fa-eye-slash' : 'fa-eye'"></span>
                                 </div>
                             </div>
                         </div>
+                        <small *ngIf="pass3NoValido" class="text-danger">
+                            La contraseña debe tener Mayúsculas, Minúsculas, Dígito y Símbolo
+                        </small>   
                     </div>
                 </form>
             </div>

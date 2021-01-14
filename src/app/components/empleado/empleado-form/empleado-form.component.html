@@ -20,7 +20,7 @@
                 <div class="col-lg-6 p-2">
                     <div class="form-group">
                         <label for="">Nombre Empleado</label>
-                        <input (keypress)="soloLetras($event)" type="text" [class.is-invalid]="nombreNoValido" class="form-control" placeholder="Nombres" formControlName='nom_user' >
+                        <input  type="text" [class.is-invalid]="nombreNoValido" class="form-control" placeholder="Nombres" formControlName='nom_user' >
                         <small *ngIf="nombreNoValido" class="text-danger">
                             Campo invalido
                           </small>

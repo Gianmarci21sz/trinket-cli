@@ -11,14 +11,18 @@ import { ItemCarroCli } from '../models/itemCarroCli';
 export class CarritoService {
   url : string = environment.uri+'carrito/';
   headers = new HttpHeaders().set('Content-Type','application/json');
+  listaCarrito : ItemCarroCli[] = [];
   constructor(private http:HttpClient) { }
   addCarrito(item : ItemCarroCli):Observable<ItemCarroCli>{
     return this.http.post<ItemCarroCli>(this.url,item,{headers:this.headers});
+  }
+  upCarrito(idcar:number,cantidad:number):Observable<boolean>{
+    return this.http.put<boolean>(this.url+`${idcar}/${cantidad}`,{headers:this.headers});
   }
   listCarrito(id : number):Observable<ItemCarroCli[]>{
     return this.http.get<ItemCarroCli[]>(this.url+id,{headers:this.headers});
   }
   delCarrito(id : number):Observable<boolean>{
     return this.http.delete<boolean>(this.url+id,{headers:this.headers});
-  }
+  }  
 }

@@ -131,7 +131,7 @@ export class EmpleadoFormComponent implements OnInit {
   crearFormulario() {
     this.nuevoEmp = this.fb.group({  
       id_emp : ['',,],    
-      nom_user : ['',Validators.required,],
+      nom_user : ['',[Validators.required],],
       ape_user : ['',Validators.required,],
       id_tip : [0,Validators.required,],
       num_dni : ['',[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/),Validators.minLength(8),Validators.maxLength(8)],],      

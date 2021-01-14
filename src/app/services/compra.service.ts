@@ -98,7 +98,8 @@ export class CompraService {
   aumentar(id:number,cantidad:number){    
     for(let ic of this.items){      
       if(+ic.prod_id === +id){        
-          ic.cant_ord_det = +cantidad;                      
+          ic.cant_ord_det = +cantidad;    
+          ic.amount_ord_det = ic.unit_price_ord_det * ic.cant_ord_det;                  
       }
     } 
     localStorage.setItem('items',JSON.stringify(this.items));
@@ -107,6 +108,7 @@ export class CompraService {
     for(let ic of this.items){      
       if(+ic.prod_id === +id){        
           ic.unit_price_ord_det = +precio;                      
+          ic.amount_ord_det = ic.unit_price_ord_det * ic.cant_ord_det;
       }
     } 
     localStorage.setItem('items',JSON.stringify(this.items));

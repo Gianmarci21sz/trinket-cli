@@ -1,4 +1,5 @@
-export interface ItemCarroCli{    
+export interface ItemCarroCli{  
+    id_carr?:number;  
     id_cli? : number;
     id_prod? : number;
     nombre_prod ?: string;

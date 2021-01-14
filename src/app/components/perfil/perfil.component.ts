@@ -101,6 +101,16 @@ export class PerfilComponent implements OnInit {
     return this.nuevoEmp.get('telefono_user').invalid && this.nuevoEmp.get('telefono_user').touched
   }
 
+  get pass1NoValido() {
+    return this.cambioContra.get('pass1').invalid && this.cambioContra.get('pass1').touched
+  }
+  get pass2NoValido() {
+    return this.cambioContra.get('pass2').invalid && this.cambioContra.get('pass2').touched
+  }
+  get pass3NoValido() {
+    return this.cambioContra.get('pass3').invalid && this.cambioContra.get('pass3').touched
+  }
+
   verActualizar() {
     this.empleadoService.buscarEmpleado(this.empleadoService.empleadolog.id_emp).subscribe((data: Empleado) => {            
       this.nuevoEmp.reset({
@@ -148,8 +158,8 @@ export class PerfilComponent implements OnInit {
 
     this.cambioContra = this.fb.group({
       pass1: ['', Validators.required,],
-      pass2: ['', Validators.required,],
-      pass3: ['', Validators.required,],
+      pass2: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(60),Validators.pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)]],
+      pass3: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(60),Validators.pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)]],
     });
   }
 
@@ -193,7 +203,16 @@ export class PerfilComponent implements OnInit {
   }
 
   cambiarPass() {
-    this.empleadoService.autenticacion(this.empleadoService.empleadolog.email, this.cambioContra.get('pass1').value)
+    if (this.cambioContra.invalid) {      
+      return Object.values(this.cambioContra.controls).forEach(control => {
+        if (control instanceof FormGroup) {
+          Object.values(control.controls).forEach(control => control.markAsTouched());
+        } else {
+          control.markAsTouched();
+        }
+      });
+    }else{
+      this.empleadoService.autenticacion(this.empleadoService.empleadolog.email, this.cambioContra.get('pass1').value)
       .subscribe((data: Empleado) => {
         if (this.cambioContra.get('pass1').value === '' || this.cambioContra.get('pass2').value === ''
           || this.cambioContra.get('pass3').value === '') {
@@ -236,6 +255,7 @@ export class PerfilComponent implements OnInit {
             });
         }
       });
+    }
   }
 
   editar() {

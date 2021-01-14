@@ -37,6 +37,7 @@ import { CliPerfilComponent } from './components-cli/cli-perfil/cli-perfil.compo
 import { CatalogoComponent } from './components-cli/catalogo/catalogo.component';
 import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
 import { PrincipalComponent } from './components-cli/principal/principal.component';
+import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,8 @@ const routes: Routes = [
     { path: 'detProducto/:id',outlet:'cli', component:DetProductoComponent },  
     { path: 'historial',outlet:'cli', component:HistorialComponent },  
     { path: 'pedido',outlet:'cli', component:PedidoComponent }, 
+    { path: 'orden',outlet:'cli', component:OrdenVentaComponent },
+    { path: '**',outlet:'cli', component:PrincipalComponent},
   ]},     
   { path: 'recuperar', component:CliRecuperarComponent },  
   { path: 'cliReestablecer/:codgen', component:CliReestablecerComponent },

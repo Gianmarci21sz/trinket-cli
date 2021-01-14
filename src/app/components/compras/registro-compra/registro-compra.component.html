@@ -62,8 +62,8 @@
                         <td style="font-weight: bold;">{{i+1}}</td>
                         <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.imagen}}" alt=""></td>
                         <td>{{prod.nombre_prod}}</td>
-                        <td><input type="text" [(ngModel)]="cajas[i]" maxlength="3" class="form-control" (keyup)="aumentar(prod.prod_id,i)" (keypress)="soloNumeros($event)" value="{{prod.cant_ord_det}}" /></td>
-                        <td><input type="text" (keyup)="aumentarPrecio(prod)" (keypress)="soloNumeros($event)" maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>
+                        <td><input type="number" step="any" [(ngModel)]="cajas[i]" maxlength="3" class="form-control" (keypress)="soloNumeros($event)" (keyup)="aumentar(prod.prod_id,i)"  value="{{prod.cant_ord_det}}" /></td>
+                        <td><input type="number" step="any" (keyup)="aumentarPrecio(prod)"  maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>
                         <td>{{(prod.unit_price_ord_det * prod.cant_ord_det) | number:'0.1-5' }}</td>
                         <td><a (click)="eliminar(prod.prod_id,prod.imagen,prod.nombre_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></a></td>
                     </tr>

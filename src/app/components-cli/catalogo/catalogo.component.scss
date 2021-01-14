@@ -27,7 +27,9 @@
     opacity: 0.5;  
     color : #ffffff; 
 }
-
+.form-control ,.custom-select{
+  height: 50px;
+}
 
 .sd>a{
     color: #ffffff;
@@ -37,7 +39,7 @@
 }
 
 body {
-    font-family: "Karla", sans-serif;
+    font-family: sans-serif;    
     background-color: #d0d0ce;
     min-height: 100vh; }
   
@@ -45,6 +47,7 @@ body {
     margin-bottom: 19px; }
     .brand-wrapper .logo {
       height: 37px; }
+
   
   .login-card {
     border: 0;

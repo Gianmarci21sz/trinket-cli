@@ -5,6 +5,7 @@ export interface Cliente {
     num_doc_cli?: string;
     dist_id?: number;
     zona_id?: number;
+    via_id?: number;
     direcc_cli?: string;
     referencia_cli?: string;
     telefono_cli?: string;

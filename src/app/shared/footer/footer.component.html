@@ -1,6 +1,24 @@
-<footer class="footer">
-  <div class="d-sm-flex justify-content-center justify-content-sm-between py-2">
-    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/angular-admin-templates/" target="_blank">  angular admin template </a> from <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a></span>
+<footer class="page-footer text-center font-small mt-4 wow fadeIn fixed-bottom" >
+    
+  <hr class="my-4">
+
+  <!-- Social icons -->
+  <div class="pb-4">
+    <a href="https://www.facebook.com/TrinketCludSales" target="_blank">
+      <i style="color: #EA320B;" class="fab fa-facebook fa-lg mr-3"></i>
+    </a>
+
+    <a (click)="whatsapp()">
+      <i style="color: #EA320B;" class="fab fa-whatsapp fa-lg mr-3"></i>
+    </a>      
   </div>
+  <!-- Social icons -->
+
+  <!--Copyright-->
+  <div class="footer-copyright py-3">
+    © 2021 Copyright:
+    <a (click)="router.navigateByUrl('catalogo')"> Trinket Cloud Sales </a>
+  </div>
+  <!--/.Copyright-->
+
 </footer>

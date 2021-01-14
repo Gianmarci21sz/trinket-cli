@@ -23,10 +23,10 @@ export class UtilsService {
     localStorage.removeItem('pendiente');
   }
 
-  cargarDataTable(tabla:string){ 
-    $(tabla).DataTable().destroy();  
+  cargarDataTable(tabla:string){     
     let buscador : boolean=true;
     if(tabla == "#tablaVentas" || tabla == "#tablaCompras"){
+      $(tabla).DataTable().destroy();  
       buscador = false;
     }
     setTimeout(()=>{            

@@ -54,6 +54,7 @@ import { CliRecuperarComponent } from './components-cli/cli-recuperar/cli-recupe
 import { CliReestablecerComponent } from './components-cli/cli-reestablecer/cli-reestablecer.component';
 import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
 import { PrincipalComponent } from './components-cli/principal/principal.component';
+import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.component';
 
 
 @NgModule({
@@ -98,7 +99,9 @@ import { PrincipalComponent } from './components-cli/principal/principal.compone
     CliRecuperarComponent,
     CliReestablecerComponent,
     DetComprasComponent,
-    PrincipalComponent,    
+    PrincipalComponent,
+    OrdenVentaComponent,  
+    
   ],
   imports: [
     BrowserModule,
@@ -110,7 +113,7 @@ import { PrincipalComponent } from './components-cli/principal/principal.compone
     ChartsModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,    
     
   ],
   providers: [ThemeService],

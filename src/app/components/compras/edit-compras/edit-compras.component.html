@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="id" >Condicion</label>
                         <input type="text" [class.is-invalid]="condicionInvalida" style="color: black;"
-                         class="form-control" disabled="+eCompra.est_ord_cab === 2" placeholder="Condicion de envio" formControlName='cond_env' >
+                         class="form-control" [disabled]="+eCompra.est_ord_cab === 2" placeholder="Condicion de envio" formControlName='cond_env' >
                         <small *ngIf="condicionInvalida" class="text-danger">
                             Campo invalido
                         </small>
@@ -71,8 +71,8 @@
                         <td style="font-weight: bold;">{{i+1}}</td>
                         <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.nom_imagen}}" alt=""></td>
                         <td>{{prod.nom_prod}}</td>
-                        <td><input type="number" step="any" disabled="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentar(prod)"  maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det | number:'0.1-5'}}"></td>
-                        <td><input type="number" step="any" disabled="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentarPrecio(prod)"  maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det | number:'0.1-5'}}"></td>
+                        <td><input type="number" step="any" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keypress)="soloNumeros($event)" (keyup)="aumentar(prod)"  maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det}}"></td>
+                        <td><input type="number" step="any" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentarPrecio(prod)"  maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>
                         <td>{{(prod.unit_price_ord_det * prod.cant_ord_det) | number:'0.1-5'}}</td>
                         <td *ngIf="+eCompra.est_ord_cab != 2"><button (click)="eliminar(prod.ord_comp_det,prod.nom_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></button></td>
                     </tr>                    

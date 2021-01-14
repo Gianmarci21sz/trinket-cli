@@ -1,77 +1,78 @@
-
-<div class="px-4 px-lg-0">  
-    <div class="pb-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">  
-            <!-- Shopping cart table -->
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col" class="border-0 bg-light">
-                      <div class="p-2 px-3 text-uppercase">Producto</div>
-                    </th>
-                    <th scope="col" class="border-0 bg-light">
-                      <div class="py-2 text-uppercase">Precio</div>
-                    </th>
-                    <th scope="col" class="border-0 bg-light">
-                      <div class="py-2 text-uppercase">Cantidad</div>
-                    </th>
-                    <th scope="col" class="border-0 bg-light">
-                      <div class="py-2 text-uppercase">Eliminar</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" class="border-0">
-                      <div class="p-2">
-                        <img src="http://192.168.1.13:1151/api/producto/verArchivo/31832pro.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                        <div class="ml-3 d-inline-block align-middle">
-                          <h5 class="mb-0"> <p class="text-dark d-inline-block align-middle">Laptop 3</p></h5><span class="text-muted font-weight-normal font-italic d-block">Categoria: Laptops</span>
-                        </div>
+<div class="px-4 px-lg-0">
+  <div class="pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+          <!-- Shopping cart table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Producto</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Precio</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Cantidad</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Eliminar</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pro of carritoService.listaCarrito">
+                  <th scope="row" class="border-0">
+                    <div class="p-2">
+                      <img src="http://192.168.1.13:1151/api/producto/verArchivo/{{pro.imagen}}" alt="" width="70"
+                        class="img-fluid rounded shadow-sm">
+                      <div class="ml-3 d-inline-block align-middle">
+                        <h5 class="mb-0">
+                          <p class="text-dark d-inline-block align-middle">{{pro.nombre_prod}}</p>
+                        </h5>
                       </div>
-                    </th>
-                    <td class="border-0 align-middle"><strong>S/. 222,233.00</strong></td>
-                    <td class="border-0 align-middle"><strong>1</strong></td>
-                    <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="p-2">
-                        <img src="http://192.168.1.13:1151/api/producto/verArchivo/36945pro.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                        <div class="ml-3 d-inline-block align-middle">
-                          <h5 class="mb-0"><p class="text-dark d-inline-block">Laptop</p></h5><span class="text-muted font-weight-normal font-italic">Categoria: Laptops</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="align-middle"><strong>S/. 1,500.00</strong></td>
-                    <td class="align-middle"><strong>1</strong></td>
-                    <td class="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                    </td>
-                  </tr>                  
-                </tbody>
-              </table>
-            </div>
-            <!-- End -->
+                    </div>
+                  </th>
+                  <td class="border-0 align-middle"><strong>S/. {{pro.base_imp_vent_det}}</strong></td>
+                  <td class="border-0 align-middle"><strong><input style="max-width: 200px;" type="text" maxlength="3" (keypress)="soloNumeros($event)" 
+                    (keyup)="actualizarCantidad(pro,$event)" [(ngModel)]="pro.cantidad" class="form-control"></strong></td>
+                  <td class="border-0 align-middle"><a (click)="eliminar(pro)" class="text-dark">
+                    <i style="color: #EA320B;" class="fa fa-trash"></i></a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          <!-- End -->
         </div>
-  
-        <div class="row py-5 p-4 bg-white rounded shadow-sm">          
-          <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Resumen de pedido </div>
-            <div class="p-4">              
-              <ul class="list-unstyled mb-4">
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"> Subtotal </strong><strong>S/. 223,733.00</strong></li>                                
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                  <h5 class="font-weight-bold">S/. 223,733.00</h5>
-                </li>
-              </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Ir a pagar</a>
-            </div>
-          </div>
-        </div>
-  
       </div>
+
+      <div class="row py-5 p-4 bg-white rounded shadow-sm">
+        <div class="col-lg-6">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Resumen de pedido </div>
+          <div class="p-4">
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"> Subtotal
+                </strong>
+                <strong>
+                  <h5>S/. {{subtotal | number:'0.1-5'}}</h5>
+                </strong>
+              </li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"> IGV
+                </strong>
+                <strong>
+                  <h5>S/. {{igv | number:'0.1-5'}}</h5>
+                </strong>
+              </li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                <h4 class="font-weight-bold">S/. {{total | number:'0.1-5'}}</h4>
+              </li>
+            </ul><a style="background: #EA320B;" class="btn rounded-pill py-2 btn-block">Ir a pagar</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>

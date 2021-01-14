@@ -24,21 +24,15 @@ export class ClienteService {
 
   verificar(){
     if(this.clientelog == null){
-      this.router.navigate(['/login']);
+      this.router.navigate(['/catalogo']);
     }
-  }
-
-  verificarLogin(){
-    if(this.clientelog){
-      this.router.navigateByUrl('/menu/(opt:empleado)');
-    }
-  }
+  }  
 
   expiracion(){
     let currentDate = new Date();
-    let exp = JSON.parse(localStorage.getItem("expires"));
+    let exp = JSON.parse(localStorage.getItem("expirescli"));
     if(Date.parse(currentDate.toString()) >= Date.parse(exp)){
-      this.salir();
+      this.salir();      
     }
   }
 
@@ -52,15 +46,16 @@ export class ClienteService {
       this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
       let expires = new Date;
       //expires.setSeconds(expires.getSeconds()+10);
-      expires.setMinutes(expires.getMinutes()+5);
-      localStorage.setItem("expires",JSON.stringify(expires));
+      expires.setMinutes(expires.getMinutes()+5000);
+      localStorage.setItem("expirescli",JSON.stringify(expires));
     }        
   }
 
   salir(){
     localStorage.setItem("clientelog",null);    
     this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
-    localStorage.removeItem("expires");                   
+    localStorage.removeItem("expirescli"); 
+    this.verificar();                  
   }
 
   // CRUD
@@ -84,4 +79,29 @@ export class ClienteService {
   eliminar(id : number):Observable<boolean>{
     return this.http.delete<boolean>(this.url+id,{headers:this.headers});
   }
+
+  validarDocCliente(doc : string):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarDocCliente/${doc}`,{headers:this.headers});
+  }
+
+  validarDocEditCliente(doc : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarDocEditCliente/${doc}/${id}`,{headers:this.headers});
+  }
+
+  validarCorreoCliente(correo : string):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarCorreoCliente/${correo}`,{headers:this.headers});
+  }
+
+  validarCorreoEditCliente(correo : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarCorreoEditCliente/${correo}/${id}`,{headers:this.headers});
+  }
+
+  validarUsuarioCliente(usuario : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarUsuarioCliente/${usuario}/${id}`,{headers:this.headers});
+  }
+
+  validarTelefonoCliente(telefono : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarTelefonoCliente/${telefono}/${id}`,{headers:this.headers});
+  }
+
 }

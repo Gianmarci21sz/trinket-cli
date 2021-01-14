@@ -22,10 +22,7 @@ export class AppComponent implements OnInit{
     public utilsService : UtilsService) {
     if(utilsService.pendiente==true){
       empleadoService.cambiar();
-    }
-    setInterval(()=>{
-      this.empleadoService.expiracion();      
-    },5000);    
+    }      
 
   }
 
