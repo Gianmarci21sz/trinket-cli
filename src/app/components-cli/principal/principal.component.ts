@@ -103,6 +103,10 @@ export class PrincipalComponent implements OnInit {
     });
   }
 
+  detProducto(id:number){
+    this.router.navigateByUrl(`catalogo/(cli:detProducto/${id})`);
+  }
+
   agregar(u: Producto) {
     this.aProducto = u;
     if(this.clienteService.clientelog){

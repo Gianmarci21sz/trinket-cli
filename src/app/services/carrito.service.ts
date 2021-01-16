@@ -25,4 +25,7 @@ export class CarritoService {
   delCarrito(id : number):Observable<boolean>{
     return this.http.delete<boolean>(this.url+id,{headers:this.headers});
   }  
+  limpiarCarrito(id : number):Observable<boolean>{
+    return this.http.delete<boolean>(this.url+'limpiarCarrito/'+id,{headers:this.headers});
+  }  
 }

@@ -55,6 +55,7 @@ import { CliReestablecerComponent } from './components-cli/cli-reestablecer/cli-
 import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
 import { PrincipalComponent } from './components-cli/principal/principal.component';
 import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.component';
+import { ErrorCliComponent } from './components-cli/error-cli/error-cli.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.co
     CliReestablecerComponent,
     DetComprasComponent,
     PrincipalComponent,
-    OrdenVentaComponent,  
+    OrdenVentaComponent,
+    ErrorCliComponent,  
     
   ],
   imports: [

@@ -29,9 +29,7 @@ export class ProductoComponent implements OnInit {
     }
   }
 
-  buscar(){
-    
-  }
+  
 
   cargarLista(){    
     this.productoService.listar().subscribe((data:Producto[])=>{

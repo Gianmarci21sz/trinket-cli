@@ -28,6 +28,12 @@ export class ClienteService {
     }
   }  
 
+  verificarLogin(){
+    if(this.clientelog){
+      this.router.navigateByUrl('/catalogo');
+    }
+  }
+
   expiracion(){
     let currentDate = new Date();
     let exp = JSON.parse(localStorage.getItem("expirescli"));
@@ -56,6 +62,24 @@ export class ClienteService {
     this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
     localStorage.removeItem("expirescli"); 
     this.verificar();                  
+  }
+
+  // RECUPERAR PASS
+
+  buscarClienteXusuario(usuario : string):Observable<Cliente>{
+    return this.http.get<Cliente>(this.url+`buscarClienteXusuario/${usuario}`,{headers:this.headers});
+  }
+
+  enviarCorreoRecuperar(correo : string){
+    return this.http.get(this.url+`enviarCorreoRecuperar/${correo}`,{headers:this.headers});
+  }
+
+  buscarPorCodigoRecuperarCli(codigo : string):Observable<Cliente>{
+    return this.http.get<Cliente>(this.url+`buscarPorCodigoRecuperarCli/${codigo}`,{headers:this.headers});
+  }
+
+  cambiarPass(usuario : string , pass : string){
+    return this.http.get(this.url+`cambiarPass/${usuario}/${pass}`,{headers:this.headers});
   }
 
   // CRUD

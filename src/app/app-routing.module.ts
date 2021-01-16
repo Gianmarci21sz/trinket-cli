@@ -38,6 +38,7 @@ import { CatalogoComponent } from './components-cli/catalogo/catalogo.component'
 import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
 import { PrincipalComponent } from './components-cli/principal/principal.component';
 import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.component';
+import { ErrorCliComponent } from './components-cli/error-cli/error-cli.component';
 
 
 const routes: Routes = [
@@ -45,16 +46,17 @@ const routes: Routes = [
   { path: 'reestablecer/:codgen', component:RestablecerComponent },    
   { path: 'recuperar',component:RecuperarComponent },       
   { path: 'login', component:LoginComponent },  
+  { path: 'errorCli', component:ErrorCliComponent }, 
   { path: 'catalogo', component:CatalogoComponent,children:[
     { path: '',outlet:'cli', component:PrincipalComponent, pathMatch: 'full'},        
     { path: 'cliPerfil',outlet:'cli', component:CliPerfilComponent },   
     { path: 'detProducto/:id',outlet:'cli', component:DetProductoComponent },  
     { path: 'historial',outlet:'cli', component:HistorialComponent },  
     { path: 'pedido',outlet:'cli', component:PedidoComponent }, 
-    { path: 'orden',outlet:'cli', component:OrdenVentaComponent },
+    { path: 'orden',outlet:'cli', component:OrdenVentaComponent },    
     { path: '**',outlet:'cli', component:PrincipalComponent},
   ]},     
-  { path: 'recuperar', component:CliRecuperarComponent },  
+  { path: 'cliRecuperar', component:CliRecuperarComponent },  
   { path: 'cliReestablecer/:codgen', component:CliReestablecerComponent },
   { path: 'error', component:ErrorComponent },  
   { path: 'menu', component:MenuComponent,children:[    
@@ -86,6 +88,7 @@ const routes: Routes = [
     { path: '**',outlet:'opt', component:EmpleadoComponent},
   ] },
   { path: '**', redirectTo: '/menu', pathMatch: 'full' },
+  { path: '**', redirectTo: '/catalogo', pathMatch: 'full' },
   
 ];
 

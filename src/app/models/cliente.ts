@@ -1,7 +1,7 @@
 export interface Cliente {
     id_cli?: number;
     nom_cli?: string;
-    tipo_doc_cli?: number;
+    tipo_doc_identidad_cli?: number;
     num_doc_cli?: string;
     dist_id?: number;
     zona_id?: number;

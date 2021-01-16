@@ -53,12 +53,12 @@ export class UpProductoComponent implements OnInit {
               private fb:FormBuilder,
               private empleadoService : EmpleadoService) { 
         this.crearFormulario();     
-        this.llenarCategorias();                        
-        
+        this.llenarCategorias(); 
+        this.cargarProducto();         
   }
 
   ngOnInit(): void { 
-    this.cargarProducto();  
+     
     if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
       this.router.navigateByUrl('menu/(opt:ventas)');
     }
@@ -95,8 +95,7 @@ export class UpProductoComponent implements OnInit {
           id_cat : this.producto.id_cat,
           nom_prod  : this.producto.nom_prod,
           id_prod : this.producto.id_prod
-        });  
-        console.log(data);
+        });          
         this.imgXprod(data.id_prod);  
         setTimeout(()=>{
           this.estado = true;

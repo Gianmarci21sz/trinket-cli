@@ -15,6 +15,7 @@ export class RestablecerComponent implements OnInit {
   correo : string = "";
   forma : FormGroup;
   estado : boolean = false;
+  isblock : boolean = true;
   constructor(private route : ActivatedRoute,
               private empleadoService : EmpleadoService,
               private fb : FormBuilder,
@@ -45,6 +46,12 @@ export class RestablecerComponent implements OnInit {
     this.forma = this.fb.group({            
       pass : ['',Validators.required,]
     });
+  }
+
+  ocultar(as: number) {
+    if (as === 1) {
+      this.isblock = !this.isblock;
+    }
   }
 
   reestablecer(){

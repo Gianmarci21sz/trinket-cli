@@ -16,7 +16,7 @@ export class PedidoComponent implements OnInit {
 
   constructor(private clienteService: ClienteService,
     public carritoService: CarritoService,
-    private router: Router) {
+    public router: Router) {
     this.clienteService.verificar();
     this.listarCarrito();
   }

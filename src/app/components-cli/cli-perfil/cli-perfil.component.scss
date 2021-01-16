@@ -1,0 +1,17 @@
+.bannerImg{
+    height: 450px;    
+}
+@media (max-width: 700px) {
+    .bannerImg {      
+      height: 300px;
+     } }
+
+@media (max-width: 500px) {
+    .bannerImg {      
+      height: 200px;
+     } }
+     
+.form-control ,.custom-select{
+  height: 50px;
+}
+

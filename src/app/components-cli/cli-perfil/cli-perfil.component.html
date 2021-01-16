@@ -1,1 +1,123 @@
-<p>cli-perfil works!</p>
+<div style="margin-top: 30vh;margin-left: 45vw;" *ngIf="!estado">
+    <div class="fa-4x" >
+        <i class="fas fa-spinner fa-spin"></i>    
+    </div>
+</div>
+<div class="col-12 my-5" *ngIf="estado">
+    <div class="card container">
+        <div class="card-body">
+            <form [formGroup]="formaR" class="row col-md-12 mt-0">
+                <h1 style="text-align: center;">Perfil</h1>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label style="display: block;">Nombre</label>
+                    <input type="text" (keypress)="soloLetras($event)" [class.is-invalid]="nombreNoValido"
+                      formControlName="nombre" class="form-control" placeholder="Nombre">
+                    <small *ngIf="nombreNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Telefono/Celular:</label>
+                    <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="telefonoNoValido"
+                      formControlName="telefono" class="form-control" placeholder="Telefono">
+                    <small *ngIf="telefonoNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Correo:</label>
+                    <input type="text" [class.is-invalid]="correoNoValido" formControlName="correo" class="form-control"
+                      placeholder="Correo">
+                    <small *ngIf="correoNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label for="">Tipo Documento:</label>
+                    <select class='custom-select' [class.is-invalid]="tipoNoValido" (change)="cambiar()"
+                      formControlName='tipo_doc'>
+                      <option *ngFor='let c of listaTipoDoc' value="{{c.id_tip}}">{{c.descrip_tip}}</option>
+                    </select>
+                    <small *ngIf="tipoNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3" *ngIf="rod">
+                    <label style="display: block;">N° DNI:</label>
+                    <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="dniNoValido"
+                      formControlName="num_doc_dni" class="form-control" placeholder="N° Documento">
+                    <small *ngIf="dniNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3" *ngIf="!rod">
+                    <label style="display: block;">N° RUC:</label>
+                    <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="rucNoValido"
+                      formControlName="num_doc_ruc" class="form-control" placeholder="N° Documento">
+                    <small *ngIf="rucNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Direccion:</label>
+                    <input type="text" [class.is-invalid]="direccionNoValido" formControlName="direccion"
+                      class="form-control" placeholder="Direccion">
+                    <small *ngIf="direccionNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label style="display: block;">Distrito:</label>
+                    <select class='custom-select' [class.is-invalid]="distritoNoValido" formControlName='distrito'>
+                      <option *ngFor='let c of listaDistrito' value="{{c.id_dist}}">{{c.distrito}}</option>
+                    </select>
+                    <small *ngIf="distritoNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Zona:</label>
+                    <select class='custom-select' [class.is-invalid]="zonaNoValido" formControlName='zona'>
+                      <option *ngFor='let c of listaZona' value="{{c.id_zona}}">{{c.descrip_zona}}</option>
+                    </select>
+                    <small *ngIf="zonaNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Via:</label>
+                    <select class='custom-select' [class.is-invalid]="viaNoValido" formControlName='via'>
+                      <option *ngFor='let c of listaVia' value="{{c.id_via}}">{{c.descrip_via}}</option>
+                    </select>
+                    <small *ngIf="viaNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Referencia:</label>
+                    <input type="text" [class.is-invalid]="referenciaNoValido" formControlName="referencia"
+                      class="form-control" placeholder="Referencia">
+                    <small *ngIf="referenciaNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>
+                  <div class="mb-3">
+                    <label style="display: block;">Usuario:</label>
+                    <input type="text" [class.is-invalid]="usuarioRNoValido" formControlName="usuario"
+                      class="form-control" placeholder="Usuario">
+                    <small *ngIf="usuarioRNoValido" class="text-danger">
+                      Campo invalido
+                    </small>
+                  </div>                  
+                </div>
+                <button class="btn btn-block btn-danger my-4" type="button" (click)="registrar()">
+                  Actualizar
+                </button>
+              </form>
+        </div>
+    </div>
+
+</div>

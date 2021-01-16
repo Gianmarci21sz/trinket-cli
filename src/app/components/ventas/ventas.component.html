@@ -38,7 +38,7 @@
                             <td>{{venta.fecha_vent_cab | date : 'dd/MM/yyyy'}} {{venta.fecha_vent_cab | date : 'HH:mm:ss'}}</td>
                             <td>{{venta.fecha_entr_cab}}</td>
                             <td>{{venta.nom_cli}}</td>
-                            <td>{{venta.num_trans_cab}}</td>
+                            <td>{{venta.descrip_pag}}</td>
                             <td class="pl-0">
                                 <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'FACTURA'" target="_blank"
                                 href="http://192.168.1.13:8084/Trinket-Reporte/comprobanteController?accion=factura&codigoVenta={{venta.id_vent_cab}}"

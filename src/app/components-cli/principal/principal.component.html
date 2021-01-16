@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-3">
 
   <!--Carousel Wrapper-->
   <div class="carousel slide mt-3 col-md-12" id="principal-carousel" data-ride="carousel">
@@ -69,15 +69,15 @@
     <!--Section: Products v.3-->
     <section class="text-center mb-4 listaproductos">
       <!--Grid row-->
-      <div class="row wow fadeIn">
+      <div class="row col-12 wow fadeIn px-0">
         <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4"
+        <div class="col-lg-3 col-md-6 mb-4 mx-0" 
           *ngFor="let u of listaFiltroTexto | paginate: {itemsPerPage : 12, currentPage : pageActual}"
           [ngStyle]="{'display':u.stock_prod == 0 || u.cant_img != 5 ? 'none' : '' }">
           <!--Card-->
           <div class="card">
             <!--Card image-->
-            <div class="view overlay py-3 px-auto">
+            <div class="view overlay py-3 px-auto" (click)="detProducto(u.id_prod)">
               <div>
                 <img style="height: 200px;width: 200px;"
                   src="http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}" class="card-img-top mx-auto"
@@ -146,8 +146,9 @@
 
   <!--Copyright-->
   <div class="footer-copyright py-3">
+    <div id="logo" ><a (click)="router.navigateByUrl('catalogo')">GM</a></div>
     © 2021 Copyright:
-    <a (click)="router.navigateByUrl('catalogo')"> Trinket Cloud Sales </a>
+    <a (click)="router.navigateByUrl('catalogo')"> Trinket Cloud Sales </a>    
   </div>
   <!--/.Copyright-->
 

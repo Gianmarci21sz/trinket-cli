@@ -1,3 +1,10 @@
+<div *ngIf="utilsService.cargaEstado" class="blocker">
+  <div class="row h-100 justify-content-center align-items-center" *ngIf="utilsService.cargaEstado">
+      <div class="fa-4x" >
+          <i class="fas fa-spinner fa-spin"></i>    
+      </div>
+  </div>
+</div>
 <div class="container-scroller">
   <app-navbar ></app-navbar>
   <div class="container-fluid page-body-wrapper">

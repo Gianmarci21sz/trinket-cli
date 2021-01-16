@@ -10,32 +10,20 @@
     .bannerImg {      
       height: 200px;
      } }
-     .custom-pagination ::ng-deep .ngx-pagination .current {
-      background: red;
-  }
-
-  .as:hover {
-    opacity: 0.5;
-}
-
-.seleccionado {
-    opacity: 0.5;
-}
-
-.sd:hover>a { 
-    background: transparent;    
-    opacity: 0.5;  
-    color : #ffffff; 
-}
+   
 .form-control ,.custom-select{
   height: 50px;
 }
 
-.sd>a{
-    color: #ffffff;
-}
-.press:hover{
-    cursor: pointer;
+.blocker {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;        /* hacemos que ocupe toda la pantalla a cualquier resolución*/
+  z-index: 50;        /* lo colocamos por encima del resto de componentes*/
+  background: black;
+  opacity: 0.5;
 }
 
 body {

@@ -138,7 +138,7 @@ export class PerfilComponent implements OnInit {
     });
   }
   cerrarModal() {
-    this.utilsService.resetPositionModal('#cantPrecio');
+    this.utilsService.resetPositionModal('#cambio');
   }
 
 

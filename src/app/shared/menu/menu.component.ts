@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +14,8 @@ export class MenuComponent implements OnInit {
 
   constructor(private empleadoService:EmpleadoService,private router:Router,
               public compraService:CompraService,
-              private titleService:Title) {    
+              private titleService:Title,
+              public utilsService:UtilsService) {    
     empleadoService.verificar();    
     this.titleService.setTitle("Trinket Admin")
     setInterval(()=>{

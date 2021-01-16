@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Categoria } from 'src/app/models/categoria';
 import { Cliente } from 'src/app/models/cliente';
 import { Distrito } from 'src/app/models/distrito';
 import { ItemCarroCli } from 'src/app/models/itemCarroCli';
-import { Producto } from 'src/app/models/producto';
 import { tipoDocIdentidad } from 'src/app/models/tipoDocIdentidad';
 import { Via } from 'src/app/models/via';
 import { Zona } from 'src/app/models/zona';
 import { CarritoService } from 'src/app/services/carrito.service';
-import { CategoriaService } from 'src/app/services/categoria.service';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { CompraService } from 'src/app/services/compra.service';
 import { DistritoService } from 'src/app/services/distrito.service';
-import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { TipoDocIdentidadService } from 'src/app/services/tipo-doc-identidad.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -30,6 +26,7 @@ declare var Swal: any;
   styleUrls: ['./catalogo.component.scss']
 })
 export class CatalogoComponent implements OnInit {
+  @ViewChild('captchaElem') captchaElem; 
   listaTipoDoc: tipoDocIdentidad[] = [];
   listaVia: Via[] = [];
   listaZona: Zona[] = [];
@@ -41,7 +38,11 @@ export class CatalogoComponent implements OnInit {
   forma: FormGroup;
   formaR: FormGroup;
   cliente: Cliente;
-  siteKey: string = "6LcqOCkaAAAAAGkNRmX4mz3IUb4KudQ94Sqp5tBw";  
+  siteKey: string = "6LcqOCkaAAAAAGkNRmX4mz3IUb4KudQ94Sqp5tBw";
+  isblock1: boolean = true;
+  isblock2: boolean = true;
+  isblock3: boolean = true;  
+  cambioContra: FormGroup;  
 
   constructor(private productoService: ProductoService,
     public compraService: CompraService,    
@@ -68,6 +69,7 @@ export class CatalogoComponent implements OnInit {
     this.crearFormulario();
     this.crearFormularioRegistro();
     this.cargarCombos();     
+    this.cambioPass();
   }  
 
   cargarCarrito(){
@@ -128,6 +130,16 @@ export class CatalogoComponent implements OnInit {
     return this.forma.get('recaptcha').invalid && this.forma.get('recaptcha').touched
   }
 
+  get pass1NoValido() {
+    return this.cambioContra.get('pass1').invalid && this.cambioContra.get('pass1').touched
+  }
+  get pass2NoValido() {
+    return this.cambioContra.get('pass2').invalid && this.cambioContra.get('pass2').touched
+  }
+  get pass3NoValido() {
+    return this.cambioContra.get('pass3').invalid && this.cambioContra.get('pass3').touched
+  }
+
 
   crearFormulario() {
     this.forma = this.fb.group({
@@ -135,6 +147,16 @@ export class CatalogoComponent implements OnInit {
       pass: ['', Validators.required],
       recaptcha: [, Validators.required]
     });
+  }
+
+  esconder(as: number) {
+    if (as === 1) {
+      this.isblock1 = !this.isblock1;
+    } else if (as === 2) {
+      this.isblock2 = !this.isblock2;
+    } else if (as === 3) {
+      this.isblock3 = !this.isblock3;
+    }
   }
 
   soloLetras(e) {
@@ -181,6 +203,62 @@ export class CatalogoComponent implements OnInit {
     }
   }
 
+  cambiarPass() {
+    if (this.cambioContra.invalid) {      
+      return Object.values(this.cambioContra.controls).forEach(control => {
+        if (control instanceof FormGroup) {
+          Object.values(control.controls).forEach(control => control.markAsTouched());
+        } else {
+          control.markAsTouched();
+        }
+      });
+    }else{
+      this.clienteService.autenticacion(this.clienteService.clientelog.user_cli, this.cambioContra.get('pass1').value)
+      .subscribe((data: Cliente) => {
+        if (this.cambioContra.get('pass1').value === '' || this.cambioContra.get('pass2').value === ''
+          || this.cambioContra.get('pass3').value === '') {
+          Swal.fire(
+            'Error',
+            'Complete todos los campos',
+            'error'
+          )
+        }
+        else if (data == null) {
+          Swal.fire(
+            'Error',
+            'Contraseña actual incorrecta',
+            'error'
+          )
+        } else if (this.cambioContra.get('pass2').value !== this.cambioContra.get('pass3').value) {
+          Swal.fire(
+            'Error',
+            'La nueva contraseña debe coincidir con la confirmacion',
+            'error'
+          )
+        } else {
+          this.clienteService.cambiarPass(this.clienteService.clientelog.user_cli, this.cambioContra.get('pass2').value)
+            .subscribe((data) => {
+              this.utilsService.cambiar();
+              Swal.fire({
+                title: 'Contraseña cambiada',
+                text: "Se cerrará la sesion",
+                icon: 'success',
+                confirmButtonText: 'OK',
+                allowOutsideClick: false
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.utilsService.borrar();
+                  $('#cambio .cerrar').click();
+                  this.clienteService.salir();
+                  this.router.navigateByUrl('/catalogo');
+                }
+              });
+            });
+        }
+      });
+    }
+  }
+
   whatsapp(){
     Swal.fire({
       title: 'Trinket Cloud Sales',
@@ -218,7 +296,7 @@ export class CatalogoComponent implements OnInit {
       this.cliente = {
         id_cli: 0,
         nom_cli: this.formaR.get('nombre').value,
-        tipo_doc_cli: this.formaR.get('tipo_doc').value,
+        tipo_doc_identidad_cli: this.formaR.get('tipo_doc').value,
         num_doc_cli: this.formaR.get('num_doc_dni').value,
         dist_id: this.formaR.get('distrito').value,
         zona_id: this.formaR.get('zona').value,
@@ -237,7 +315,7 @@ export class CatalogoComponent implements OnInit {
       this.cliente = {
         id_cli: 0,
         nom_cli: this.formaR.get('nombre').value,
-        tipo_doc_cli: this.formaR.get('tipo_doc').value,
+        tipo_doc_identidad_cli: this.formaR.get('tipo_doc').value,
         num_doc_cli: this.formaR.get('num_doc_ruc').value,
         dist_id: this.formaR.get('distrito').value,
         zona_id: this.formaR.get('zona').value,
@@ -273,18 +351,34 @@ export class CatalogoComponent implements OnInit {
     }
   }
 
+  cambioPass(){
+    this.cambioContra = this.fb.group({
+      pass1: ['', Validators.required,],
+      pass2: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(60),Validators.pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)]],
+      pass3: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(60),Validators.pattern(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)]],
+    });
+  }
+
   limpiar() {
     this.formaR.reset();
+    this.isblock = true;
   }
 
   limpiarLogin(){
-    this.forma.reset();
+    this.captchaElem.resetCaptcha();
+    this.forma.reset();  
+    this.isblock = true;    
   }
 
   ocultar(as: number) {
     if (as === 1) {
       this.isblock = !this.isblock;
     }
+  }
+
+  recuperar(){
+    $("#login .btn-close").click();
+    this.router.navigateByUrl('/cliRecuperar');
   }
 
   salir() {
@@ -331,6 +425,7 @@ export class CatalogoComponent implements OnInit {
         }
       });
     }else {      
+      this.utilsService.cargaEstadoCli = true;
       this.clienteService.validarTelefonoCliente(this.cliente.telefono_cli,0)
       .subscribe((data:boolean)=>{
         if(data == true){
@@ -369,6 +464,7 @@ export class CatalogoComponent implements OnInit {
                     }else{
                       this.clienteService.agregar(this.cliente).subscribe((data:Cliente)=>{
                         if(data !== null){
+                          this.utilsService.cargaEstadoCli = false;
                           Swal.fire(
                             "Registro exitoso",
                             "Ahora puede iniciar sesion con su usuario y contraseña",

@@ -9,24 +9,24 @@
   <title>Document</title>
 </head>
 
-<body>
+<body>  
   
     <!-- Navbar -->
-  <nav class="fixed-top navbar navbar-expand-lg navbar-light white
-  d-flex justify-content-lg-between scrolling-navbar p-2">
+    <nav class="fixed-top navbar navbar-expand-lg navbar-light white">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo" routerLink="/catalogo"><img style="width: 200px;height: 50px;"
             src="assets/images/logoTrinketV.jpg" alt="logo" /></a>      
       </div>
-      <div class="">
-  
-        <!-- Collapse -->
-        <button class="navbar-toggler" type="button" (click)="show2=!show2">
-          <i class="fas fa-bars" style="color: #EA320B;"></i>
-        </button>
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'show' : show2}">
-          <ul class="navbar-nav mr-auto ">
+      <button class="navbar-toggler" type="button" (click)="show2=!show2">
+        <i class="fas fa-bars" style="color: #EA320B;"></i>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'show' : show2}">
+        <ul class="navbar-nav mr-auto">
+          
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav mr-auto float-left">
             <li class="nav-item">
               <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#login"
                 data-bs-whatever="@mdo" *ngIf="!clienteService.clientelog" (click)="limpiarLogin()">Ingresar</button>
@@ -37,7 +37,7 @@
             </li>
           </ul>
           <!-- Left -->
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto float-left">
             <li class="nav-item">
               <a class="nav-link waves-effect">
                 <span class="badge red z-depth-1 mr-1" *ngIf="carritoService.listaCarrito.length>0"> {{carritoService.listaCarrito.length}} </span>
@@ -59,7 +59,11 @@
                     <i class="fas fa-user" style="color: #EA320B;"></i>
                     Perfil
                   </a>
-                  <a class="dropdown-item">
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#cambio" data-bs-whatever="@getbootstrap">
+                    <i class="fas fa-unlock-alt"  style="color: #EA320B;"></i>
+                    Clave
+                  </a>
+                  <a class="dropdown-item" (click)="salir()">
                     <i class="fas fa-sign-out-alt" style="color: #EA320B;"></i>
                     Salir
                   </a>
@@ -67,16 +71,9 @@
               </ul>
             </li>
           </ul>
-          <ul class="navbar-nav mr-auto ">
-            <li class="nav-item">
-              <button *ngIf="clienteService.clientelog" class="btn btn-outline-danger" (click)="salir()">Salir</button>
-            </li>
-          </ul>
-  
-        </div>
-  
+        </form>
       </div>
-    </nav> <br /><br /><br /><br />
+    </nav><br/><br/><br/>
     <!-- Navbar -->
     
     <router-outlet name='cli'></router-outlet>
@@ -110,7 +107,7 @@
                     <div class="mb-3">
                       <label style="display: block;" for="recipient-name" class="col-form-label">Contraseña:</label>
                       <div class="input-group" style="height: 50px;">
-                        <input [class.is-invalid]="passNoValido" (keyup.enter)="login()" [type]="isblock ? 'password' : 'text'"
+                        <input [class.is-invalid]="passNoValido" placeholder="************" (keyup.enter)="login()" [type]="isblock ? 'password' : 'text'"
                           class="form-control pl-3 m-0" formControlName="pass">
                         <div class="input-group-prepend" (click)="ocultar(1)">
                           <div class="input-group-text px-3 press" style="background: #EA320B;">
@@ -123,7 +120,7 @@
                       </small>
                     </div>
                     <div class="mb-3 container">
-                      <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" formControlName="recaptcha">
+                      <ngx-recaptcha2 id="captcha" #captchaElem [siteKey]="siteKey" formControlName="recaptcha">
                       </ngx-recaptcha2>
                       <small *ngIf="captchaNoValido" class="text-danger">
                         Marcar ReCaptcha
@@ -132,7 +129,7 @@
                     <button class="btn btn-block btn-danger mb-4" type="button" (click)="login()">
                       Ingresar</button>
                   </form>
-                  <a href="#!" class="forgot-password-link">Olvidaste tu contraseña?</a>                  
+                  <a (click)="recuperar()" class="forgot-password-link">Olvidaste tu contraseña?</a>                  
                 </div>
               </div>
             </div>
@@ -141,13 +138,20 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="registro" aria-labelledby="registro" aria-hidden="true">
+  <div class="modal fade" id="registro" aria-labelledby="registro" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">    
     <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content p-0">
+      <div class="modal-content p-0">        
         <div class="modal-body m-0 p-0">
           <button type="button" class="btn-close float-right mt-3 mr-3" data-bs-dismiss="modal"
             aria-label="Close"></button>
           <div class="card-body pb-3 pt-0">
+            <div *ngIf="utilsService.cargaEstadoCli" class="blocker">
+              <div style="margin-top: 28%;margin-left: 46%;">
+                <div class="fa-4x" >
+                    <i class="fas fa-spinner fa-spin"></i>    
+                </div>
+            </div>
+            </div>
             <form [formGroup]="formaR" class="row col-md-12 mt-0">
               <h1 style="text-align: center;">Registro</h1>
               <div class="col-md-6">
@@ -160,7 +164,7 @@
                   </small>
                 </div>
                 <div class="mb-3">
-                  <label style="display: block;">Telefono:</label>
+                  <label style="display: block;">Telefono/Celular:</label>
                   <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="telefonoNoValido"
                     formControlName="telefono" class="form-control" placeholder="Telefono">
                   <small *ngIf="telefonoNoValido" class="text-danger">
@@ -257,7 +261,7 @@
                 <div class="mb-3">
                   <label style="display: block;">Contraseña (tamaño min 8):</label>
                   <div class="input-group mb-0 p-0">
-                    <input [class.is-invalid]="passRNoValido" (keyup.enter)="login()"
+                    <input [class.is-invalid]="passRNoValido" (keyup.enter)="registrar()"
                       [type]="isblock ? 'password' : 'text'" class="form-control pl-3" placeholder="************"
                       formControlName="pass">
                     <div class="input-group-prepend" (click)="ocultar(1)" style="max-height: 50px;">
@@ -280,6 +284,70 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="cambio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: red;font-weight: bold;">CAMBIO DE CONTRASEÑA</h5>
+                <button type="button" class="bg-light cerrar" style="border: 0px;font-size: 25px;" data-bs-dismiss="modal">
+                    <span aria-hidden="true" class="">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="cambioContra">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Contraseña actual:</label>                         
+                        <div class="input-group mb-0">
+                            <input [class.is-invalid]="pass1NoValido" [type]="isblock1 ? 'password' : 'text'" class="form-control pl-3" id="pass1" formControlName="pass1">
+                            <div class="input-group-prepend" (click)="esconder(1)">
+                                <div class="input-group-text px-3 press" style="background: #EA320B;">
+                                    <span  class="fa icon" [class]="isblock1 ? 'fa-eye-slash' : 'fa-eye'"></span>
+                                </div>
+                            </div>
+                        </div> 
+                        <small *ngIf="pass1NoValido" class="text-danger">
+                            Campo invalido
+                        </small>                       
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Nueva contraseña (tamaño min 8):</label>                       
+                        <div class="input-group mb-0">
+                            <input [class.is-invalid]="pass2NoValido" [type]="isblock2 ? 'password' : 'text'" class="form-control pl-3" id="pass2" formControlName="pass2">
+                            <div class="input-group-prepend" (click)="esconder(2)">
+                                <div class="input-group-text px-3 press" style="background: #EA320B;">
+                                    <span  class="fa icon" [class]="isblock2 ? 'fa-eye-slash' : 'fa-eye'"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <small *ngIf="pass2NoValido" class="text-danger">
+                            La contraseña debe tener Mayúsculas, Minúsculas, Dígito y Símbolo
+                        </small>   
+                    </div>
+                    <div class="mb-0">
+                        <label for="message-text" class="col-form-label">Confirmar contraseña (tamaño min 8):</label>
+                        <div class="input-group mb-3">
+                            <input [class.is-invalid]="pass3NoValido" [type]="isblock3 ? 'password' : 'text'" class="form-control pl-3" id="pass3" formControlName="pass3">
+                            <div class="input-group-prepend" (click)="esconder(3)">
+                                <div class="input-group-text px-3 press" style="background: #EA320B;">
+                                    <span  class="fa icon" [class]="isblock3 ? 'fa-eye-slash' : 'fa-eye'"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <small *ngIf="pass3NoValido" class="text-danger">
+                            La contraseña debe tener Mayúsculas, Minúsculas, Dígito y Símbolo
+                        </small>   
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                    >Cancelar</button>
+                <button type="button" class="btn btn-outline-success" (click)="cambiarPass()">Cambiar</button>
+            </div>
+        </div>
+    </div>
+</div>
   
   
 

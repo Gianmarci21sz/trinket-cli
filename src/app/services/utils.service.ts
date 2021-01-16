@@ -6,6 +6,7 @@ declare var $:any;
 })
 export class UtilsService { 
   cargaEstado : boolean = false;  
+  cargaEstadoCli : boolean = false;
   pendiente : boolean = false;
   constructor() {     
     if(localStorage.getItem('pendiente')){
