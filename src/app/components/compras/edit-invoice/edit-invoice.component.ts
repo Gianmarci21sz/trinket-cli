@@ -5,6 +5,7 @@ import { Compra } from 'src/app/models/compra';
 import { Invoice } from 'src/app/models/invoice';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
+declare var Swal:any;
 
 @Component({
   selector: 'app-edit-invoice',
@@ -135,6 +136,11 @@ export class EditInvoiceComponent implements OnInit {
     }else{
       this.llenarInvoice();
       this.invoiceService.editar(this.invoice).subscribe((data:Invoice)=>{
+        Swal.fire(
+          'Modificado',
+          'Invoice modificado correctamente',
+          'success'
+        ) 
         this.router.navigateByUrl('/menu/(opt:listaInvoice)');
       });
     }

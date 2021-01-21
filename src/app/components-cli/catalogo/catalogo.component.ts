@@ -70,7 +70,7 @@ export class CatalogoComponent implements OnInit {
     this.crearFormularioRegistro();
     this.cargarCombos();     
     this.cambioPass();
-  }  
+  }   
 
   cargarCarrito(){
     this.carritoService.listCarrito(this.clienteService.clientelog.id_cli)
@@ -248,6 +248,7 @@ export class CatalogoComponent implements OnInit {
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.utilsService.borrar();
+                  this.carritoService.listaCarrito = [];
                   $('#cambio .cerrar').click();
                   this.clienteService.salir();
                   this.router.navigateByUrl('/catalogo');

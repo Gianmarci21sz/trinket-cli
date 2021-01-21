@@ -285,9 +285,13 @@ export class EmpleadoFormComponent implements OnInit {
             }else{
               this.empleadoService.agregarEmpleado(this.empleado).subscribe((data:Empleado)=>{
                 this.empleadoService.enviarCorreoEmp(data).subscribe((data:string)=>{
-                  console.log(data);
-                });
-                this.router.navigateByUrl('/menu/(opt:empleado)');
+                  Swal.fire(
+                    'Agregado',
+                    'Empleado agregado correctamente',
+                    'success'
+                  )                  
+                  this.router.navigateByUrl('/menu/(opt:empleado)');
+                });                
               });
             }
           })

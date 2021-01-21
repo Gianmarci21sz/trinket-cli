@@ -44,7 +44,7 @@
                     </small>
                   </div>
                   <div class="mb-3" *ngIf="rod">
-                    <label style="display: block;">N° DNI:</label>
+                    <label style="display: block;">N° Documento:</label>
                     <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="dniNoValido"
                       formControlName="num_doc_dni" class="form-control" placeholder="N° Documento">
                     <small *ngIf="dniNoValido" class="text-danger">
@@ -52,7 +52,7 @@
                     </small>
                   </div>
                   <div class="mb-3" *ngIf="!rod">
-                    <label style="display: block;">N° RUC:</label>
+                    <label style="display: block;">N° Documento:</label>
                     <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="rucNoValido"
                       formControlName="num_doc_ruc" class="form-control" placeholder="N° Documento">
                     <small *ngIf="rucNoValido" class="text-danger">

@@ -251,11 +251,11 @@ export class EditComprasComponent implements OnInit {
     }else{
       this.compraService.upCompraCondicion(+this.eCompra.id_ord_comp_cab,this.nuevaCompra.get('cond_env').value)
       .subscribe((data:boolean)=>{
-        for(let det of this.listaDetalle){
-          this.compraService.upDetalleCantidad(+det.ord_comp_det,+det.cant_ord_det,+det.unit_price_ord_det)
-          .subscribe((data:boolean)=>{            
-          });
-        }
+        Swal.fire(
+          'Modificado',
+          'Compra modificada correctamente',
+          'success'
+        ) 
         this.router.navigateByUrl('/menu/(opt:listaCompras)');
       });
     }

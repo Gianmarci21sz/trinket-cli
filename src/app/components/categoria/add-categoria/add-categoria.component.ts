@@ -76,6 +76,11 @@ export class AddCategoriaComponent implements OnInit {
           )
         }else{
           this.categoriaService.agregar(this.categoria).subscribe((data:Categoria)=>{
+            Swal.fire(
+              'Agregado',
+              'Categoria agregada correctamente',
+              'success'
+            )
             this.router.navigateByUrl('/menu/(opt:categoria)');
           });
         }

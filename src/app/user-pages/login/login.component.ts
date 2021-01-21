@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
         if(data){          
           this.empleadoService.empleadolog=data;
           this.empleadoService.guardarLocal();
-          if(this.empleadoService.empleadolog.nombre_rol === 'Repartidor'){
+          if(this.empleadoService.empleadolog.nombre_rol === 'Repartidor'
+          || this.empleadoService.empleadolog.nombre_rol === 'Encargado'){
             Swal.fire(
               'Error',
               'Usted no tiene acceso al sistema',
@@ -85,8 +86,8 @@ export class LoginComponent implements OnInit {
             }).then((result) => {
               if (result.isConfirmed) {    
                 this.utilsService.borrar();
-                this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
-                +' '+this.empleadoService.empleadolog.ape_emp);  
+                /*this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
+                +' '+this.empleadoService.empleadolog.ape_emp);  */
                 if(this.empleadoService.empleadolog.nombre_rol === 'Administrador'){
                   this.router.navigateByUrl('/menu/(opt:empleado)');
                 }else if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){

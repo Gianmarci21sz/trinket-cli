@@ -206,7 +206,12 @@ export class AddProveedorComponent implements OnInit {
                     'error'
                   );
                 }else{
-                  this.proveedorService.agregar(this.proveedor).subscribe((data:Proveedor)=>{                
+                  this.proveedorService.agregar(this.proveedor).subscribe((data:Proveedor)=>{  
+                    Swal.fire(
+                      'Agregado',
+                      'Proveedor agregado correctamente',
+                      'success'
+                    )               
                     this.router.navigateByUrl('/menu/(opt:proveedor)');
                   });
                 }

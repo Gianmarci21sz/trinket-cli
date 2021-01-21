@@ -8,6 +8,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 declare var Swal : any;
+declare var $ : any;
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -40,11 +41,14 @@ export class AddProductoComponent implements OnInit {
     private productoService: ProductoService,
     private empleadoService: EmpleadoService) {
     this.crearFormulario();
-    this.llenarCategorias();
-
+    this.llenarCategorias();    
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    $('.as').select2({
+      placeholder: 'Seleccione Veterinarias',
+
+  });
     if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor') {
       this.router.navigateByUrl('menu/(opt:ventas)');
     }
@@ -114,6 +118,11 @@ export class AddProductoComponent implements OnInit {
                 this.productoService.cargarImagen(data.id_prod, this.file3).subscribe(data3 => {
                   this.productoService.cargarImagen(data.id_prod, this.file4).subscribe(data4 => {
                     this.productoService.cargarImagen(data.id_prod, this.file5).subscribe(data5 => {
+                      Swal.fire(
+                        'Agregado',
+                        'Producto agregado correctamente',
+                        'success'
+                      ) 
                       this.router.navigateByUrl('/menu/(opt:producto)');
                     });
                   });

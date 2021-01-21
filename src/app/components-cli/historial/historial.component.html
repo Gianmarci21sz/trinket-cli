@@ -17,6 +17,7 @@
                             <th style="font-weight: bold;">Fecha Venta</th>
                             <th style="font-weight: bold;">Fecha Entrega</th>                            
                             <th style="font-weight: bold;">Tipo Documento</th>
+                            <th style="font-weight: bold;">Estado</th>
                             <th style="font-weight: bold;">Comprobante</th>                
                         </tr>
                     </thead>
@@ -27,12 +28,17 @@
                             <td>{{venta.fecha_vent_cab | date : 'dd/MM/yyyy'}} {{venta.fecha_vent_cab | date : 'HH:mm:ss'}}</td>
                             <td>{{venta.fecha_entr_cab}}</td>                            
                             <td>{{venta.descrip_pag}}</td>
+                            <td *ngIf="venta.est_vent_cab == 1">PENDIENTE</td>
+                            <td *ngIf="venta.est_vent_cab == 2">REVISADO</td>
+                            <td *ngIf="venta.est_vent_cab == 3">ENVIADO</td>
+                            <td *ngIf="venta.est_vent_cab == 5">NO ENTREGADO</td>
+                            <td *ngIf="venta.est_vent_cab == 4">ENTREGADO</td>
                             <td class="pl-0">
                                 <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'FACTURA'" target="_blank"
-                                href="http://192.168.1.13:8084/Trinket-Reporte/comprobanteController?accion=factura&codigoVenta={{venta.id_vent_cab}}"
+                                href="http://192.168.1.13:8080/Trinket-Reporte/comprobanteController?accion=factura&codigoVenta={{venta.id_vent_cab}}"
                                 class="ml-4 btn btn-sm btn-outline-dark" >Generar</a>
                                 <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'BOLETA'" target="_blank"
-                                href="http://192.168.1.13:8084/Trinket-Reporte/comprobanteController?accion=boleta&codigoVenta={{venta.id_vent_cab}}"
+                                href="http://192.168.1.13:8080/Trinket-Reporte/comprobanteController?accion=boleta&codigoVenta={{venta.id_vent_cab}}"
                                 class="ml-4 btn btn-sm btn-outline-dark" >Generar</a>
                                 <button *ngIf="venta.fecha_entr_cab===null" class="ml-4 btn btn-sm btn-outline-dark" disabled>Generar</button>
                             </td>                

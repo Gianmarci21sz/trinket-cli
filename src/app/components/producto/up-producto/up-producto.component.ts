@@ -166,7 +166,12 @@ export class UpProductoComponent implements OnInit {
             this.productoService.actualizarImagen(this.imagenesArr[2].id_imagen,this.file3).subscribe(data=>{},err=>{});
             this.productoService.actualizarImagen(this.imagenesArr[3].id_imagen,this.file4).subscribe(data=>{},err=>{});
             this.productoService.actualizarImagen(this.imagenesArr[4].id_imagen,this.file5)
-            .subscribe((data)=>{          
+            .subscribe((data)=>{     
+              Swal.fire(
+                'Modificado',
+                'Producto actualizado correctamente',
+                'success'
+              )     
               this.router.navigateByUrl('/menu/(opt:producto)');          
             },
               err=>{});

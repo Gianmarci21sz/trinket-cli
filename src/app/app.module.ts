@@ -56,6 +56,9 @@ import { DetComprasComponent } from './components/compras/det-compras/det-compra
 import { PrincipalComponent } from './components-cli/principal/principal.component';
 import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.component';
 import { ErrorCliComponent } from './components-cli/error-cli/error-cli.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -115,7 +118,10 @@ import { ErrorCliComponent } from './components-cli/error-cli/error-cli.componen
     ChartsModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgxCaptchaModule,    
+    NgxCaptchaModule,  
+    MatSelectModule,
+    MatFormFieldModule, 
+    NgxMatSelectSearchModule 
     
   ],
   providers: [ThemeService],

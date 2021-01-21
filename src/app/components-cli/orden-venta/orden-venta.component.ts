@@ -97,7 +97,7 @@ export class OrdenVentaComponent implements OnInit {
       });
     } else {
       let i = 0;
-      let texto: string = "Stock no disponible: ";
+      let texto: string = "";
       for (let item of this.carritoService.listaCarrito) {
         this.ventasService.validarStock(item.cantidad, item.id_prod)
           .subscribe((data: boolean) => {
@@ -108,6 +108,7 @@ export class OrdenVentaComponent implements OnInit {
           });
       }
       setTimeout(() => {
+        texto = "Stock no disponible: ";
         for (let er of this.errores) {
           texto += er + ', ';
         }
@@ -133,7 +134,7 @@ export class OrdenVentaComponent implements OnInit {
                               });
                             Swal.fire(
                               "Pedido Realizado",
-                              "El pedido se realizo correctamente,revise su correo.",
+                              "El pedido se realizo correctamente, revise su correo.",
                               "success"
                             )
                             this.router.navigateByUrl('catalogo');
@@ -147,6 +148,7 @@ export class OrdenVentaComponent implements OnInit {
       }, 500);
     }
   }
+  
 
   cargar() {
     this.forma.reset({

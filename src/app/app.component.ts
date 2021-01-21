@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
+import { ClienteService } from './services/cliente.service';
 import { EmpleadoService } from './services/empleado.service';
 import { UtilsService } from './services/utils.service';
 declare var jQuery:any;
@@ -19,7 +20,9 @@ export class AppComponent implements OnInit{
   isLoading: boolean;
 
   constructor(private router: Router,public empleadoService:EmpleadoService,
-    public utilsService : UtilsService) {
+    public utilsService : UtilsService,
+    private clienteService:ClienteService
+    ) {
     if(utilsService.pendiente==true){
       empleadoService.cambiar();
     }      
@@ -30,6 +33,11 @@ export class AppComponent implements OnInit{
   }
 
   actividad(){    
-    this.empleadoService.guardarLocal();    
+    if(this.empleadoService.empleadolog){
+      this.empleadoService.guardarLocal(); 
+    }
+    if(this.clienteService.clientelog){
+      this.clienteService.guardarLocal(); 
+    }
   }
 }

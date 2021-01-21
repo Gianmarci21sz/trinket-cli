@@ -63,14 +63,14 @@
                     </div> 
                     <div class="form-group" *ngIf="rod">
                         <label for="">N° Documento</label>
-                        <input class="form-control" type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numDniUserNoValido" placeholder="Numero documento dni" formControlName='num_doc_dni'>
+                        <input class="form-control" type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numDniUserNoValido" placeholder="N° Documento" formControlName='num_doc_dni'>
                         <small *ngIf="numDniUserNoValido" class="text-danger">
                             Campo invalido
                         </small>
                     </div>    
                     <div class="form-group" *ngIf="!rod">
                         <label for="">N° Documento</label>
-                        <input class="form-control" type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numRucUserNoValido" placeholder="Numero documento ruc" formControlName='num_doc_ruc'>
+                        <input class="form-control" type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="numRucUserNoValido" placeholder="N° Documento" formControlName='num_doc_ruc'>
                         <small *ngIf="numRucUserNoValido" class="text-danger">
                             Campo invalido
                         </small>

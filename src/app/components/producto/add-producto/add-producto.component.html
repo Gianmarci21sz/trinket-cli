@@ -9,7 +9,7 @@
             <i class="fas fa-times fa-lg float-right my-auto py-auto" 
             style="color: #EA320B;display: inline-block;cursor: pointer;" (click)="volver()"></i>
             <h4 style="color: #EA320B;">Nuevo Producto</h4>
-        </div>
+        </div>        
         <div class="card-body">
             <form [formGroup]="nuevoProd" (ngSubmit)="agregar()">
                 <div class="row">
@@ -43,8 +43,10 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="">Categoria</label>
-                        <select class='custom-select' [class.is-invalid]="categoriaNoValido" formControlName='id_cat'>                        
-                            <option *ngFor='let c of listaCategorias' value="{{c.id_cat}}">{{c.nom_cat}}</option>
+                        <select class='custom-select as' [class.is-invalid]="categoriaNoValido" formControlName='id_cat'>                            
+                            <option *ngFor='let c of listaCategorias' value="{{c.id_cat}}">                                
+                                {{c.nom_cat}}
+                            </option>
                         </select>
                         <small *ngIf="categoriaNoValido" class="text-danger">
                             Campo invalido
@@ -52,30 +54,30 @@
                     </div>  
                 </div>                    
                 <label for="">Imagen Principal</label>
-                <div class="row">                    
+                <div class="row ">                    
                     <div class="col-lg-4">                        
                         <input type="file" class="d-none" (change)="onPhotoSelected1($event)" #photoInput1 >
-                        <img style='height: 270px;width: 270px;cursor: pointer;' [src]="photoSelected1 || 'assets/no-image.png'" class="mx-5 img-fluid col-12" alt="No image"
+                        <img style='height: 300px;cursor: pointer;' [src]="photoSelected1 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput1.click()">                          
                     </div>  
                     <div class="col-lg-4">
                         <input type="file" class="d-none" (change)="onPhotoSelected2($event)" #photoInput2 >
-                        <img style='height: 270px;width: 270px;cursor: pointer;' [src]="photoSelected2 || 'assets/no-image.png'" class="mx-5 img-fluid col-12" alt="No image"
+                        <img style='height: 300px;cursor: pointer;' [src]="photoSelected2 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput2.click()">
                     </div>
                     <div class="col-lg-4">                        
                         <input type="file" class="d-none" (change)="onPhotoSelected3($event)" #photoInput3 >
-                        <img style='height: 270px;width: 270px;cursor: pointer;' [src]="photoSelected3 || 'assets/no-image.png'" class="mx-5 img-fluid col-12" alt="No image"
+                        <img style='height: 300px;cursor: pointer;' [src]="photoSelected3 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput3.click()">                                           
                     </div>
                     <div class="col-lg-4">
                         <input type="file" class="d-none" (change)="onPhotoSelected4($event)" #photoInput4 >
-                        <img style='height: 270px;width: 270px;cursor: pointer;' [src]="photoSelected4 || 'assets/no-image.png'" class="mx-5 img-fluid col-12" alt="No image"
+                        <img style='height: 300px;cursor: pointer;' [src]="photoSelected4 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput4.click()"> 
                     </div>
                     <div class="col-lg-4">
                         <input type="file" class="d-none" (change)="onPhotoSelected5($event)" #photoInput5 >
-                        <img style='height: 270px;width: 270px;cursor: pointer;' [src]="photoSelected5 || 'assets/no-image.png'" class="mx-5 img-fluid col-12" alt="No image"
+                        <img style='height: 300px;cursor: pointer;' [src]="photoSelected5 || 'assets/no-image.png'" class="img-fluid col-12" alt="No image"
                             (click)="photoInput5.click()">
                     </div>
                 </div>

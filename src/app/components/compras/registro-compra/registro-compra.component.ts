@@ -155,6 +155,11 @@ export class RegistroCompraComponent implements OnInit {
         this.compraService.registrarDetalle(this.compraService.items).subscribe((data:string)=>{
           this.compraService.items = [];
           localStorage.setItem("items",JSON.stringify(this.compraService.items));
+          Swal.fire(
+            'Agregado',
+            'Compra agregada correctamente',
+            'success'
+          ) 
           this.router.navigateByUrl('/menu/(opt:listaCompras)');
         });    
       });

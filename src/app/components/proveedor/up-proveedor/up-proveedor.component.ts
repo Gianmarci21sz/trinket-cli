@@ -235,7 +235,12 @@ export class UpProveedorComponent implements OnInit {
                     'error'
                   );
                 }else{
-                  this.proveedorService.actualizar(this.proveedor).subscribe((data:Proveedor)=>{                
+                  this.proveedorService.actualizar(this.proveedor).subscribe((data:Proveedor)=>{    
+                    Swal.fire(
+                      'Modificado',
+                      'Proveedor modificado correctamente',
+                      'success'
+                    )             
                     this.router.navigateByUrl('/menu/(opt:proveedor)');
                   });
                 }

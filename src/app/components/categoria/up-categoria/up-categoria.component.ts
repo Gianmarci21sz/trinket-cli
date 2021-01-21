@@ -92,6 +92,11 @@ export class UpCategoriaComponent implements OnInit {
           )
         }else{
           this.categoriaService.actualizar(this.categoria).subscribe((data:Categoria)=>{
+            Swal.fire(
+              'Modificado',
+              'Categoria modificada correctamente',
+              'success'
+            )
             this.router.navigateByUrl('/menu/(opt:categoria)');
           });
         }
