@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="id" >Condicion</label>
                         <input type="text" [class.is-invalid]="condicionInvalida" style="color: black;"
-                         class="form-control" [disabled]="+eCompra.est_ord_cab === 2" placeholder="Condicion de envio" formControlName='cond_env' >
+                         class="form-control" [readOnly]="+eCompra.est_ord_cab === 2" placeholder="Condicion de envio" formControlName='cond_env' >
                         <small *ngIf="condicionInvalida" class="text-danger">
                             Campo invalido
                         </small>

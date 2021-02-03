@@ -19,8 +19,7 @@ export class CategoriaComponent implements OnInit {
               private empleadoService:EmpleadoService,
               public router : Router) { }
 
-  ngOnInit(): void {
-    this.utilsService.cargarDataTable('#tablaCategoria');
+  ngOnInit(): void {    
     this.listarCategorias(); 
     if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
       this.router.navigateByUrl('menu/(opt:ventas)');
@@ -32,6 +31,7 @@ export class CategoriaComponent implements OnInit {
     this.categoriaService.listar().subscribe((data:Categoria[])=>{
       this.listaCategorias = data;
       this.estado = true;
+      this.utilsService.cargarDataTable('#tablaCategoria');
     });
   }
 

@@ -52,14 +52,14 @@ export class ClienteService {
       this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
       let expires = new Date;
       //expires.setSeconds(expires.getSeconds()+10);
-      expires.setMinutes(expires.getMinutes()+5000);
+      expires.setMinutes(expires.getMinutes()+5);
       localStorage.setItem("expirescli",JSON.stringify(expires));
     }        
   }
 
   salir(){
-    localStorage.setItem("clientelog",null);    
-    this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
+    localStorage.removeItem("clientelog");    
+    this.clientelog=null;
     localStorage.removeItem("expirescli"); 
     this.verificar();                  
   }

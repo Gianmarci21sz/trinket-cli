@@ -26,8 +26,8 @@ export class UtilsService {
 
   cargarDataTable(tabla:string){     
     let buscador : boolean=true;
-    if(tabla == "#tablaVentas" || tabla == "#tablaCompras"){
-      $(tabla).DataTable().destroy();  
+    $(tabla).DataTable().destroy(); 
+    if(tabla == "#tablaVentas" || tabla == "#tablaCompras"){       
       buscador = false;
     }
     setTimeout(()=>{            

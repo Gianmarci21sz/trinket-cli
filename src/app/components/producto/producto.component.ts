@@ -21,8 +21,7 @@ export class ProductoComponent implements OnInit {
         
   }
 
-  ngOnInit(): void {   
-    this.utilsService.cargarDataTable('#tablaProducto');
+  ngOnInit(): void {       
     this.cargarLista();     
     if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
       this.router.navigateByUrl('menu/(opt:ventas)');
@@ -34,7 +33,8 @@ export class ProductoComponent implements OnInit {
   cargarLista(){    
     this.productoService.listar().subscribe((data:Producto[])=>{
       this.lista=data; 
-      this.estado = true;              
+      this.estado = true; 
+      this.utilsService.cargarDataTable('#tablaProducto');             
     });     
   }
 

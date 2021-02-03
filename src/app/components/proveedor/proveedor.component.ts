@@ -19,8 +19,7 @@ export class ProveedorComponent implements OnInit {
               public router : Router,
               private empleadoService : EmpleadoService) { }
 
-  ngOnInit(): void {    
-    this.utilsService.cargarDataTable('#tablaProveedor');
+  ngOnInit(): void {        
     this.listarProveedores();
     if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
       this.router.navigateByUrl('menu/(opt:ventas)');
@@ -31,6 +30,7 @@ export class ProveedorComponent implements OnInit {
     this.proveedorService.listar().subscribe((data:Proveedor[])=>{
       this.listaProveedores = data;   
       this.estado = true;   
+      this.utilsService.cargarDataTable('#tablaProveedor');
     });
   }
 

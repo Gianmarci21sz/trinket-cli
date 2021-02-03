@@ -21,8 +21,7 @@ export class EmpleadoComponent implements OnInit {
     public router: Router) {
   }
 
-  ngOnInit(): void {
-    this.utilsService.cargarDataTable('#tablaEmpleado');
+  ngOnInit(): void {    
     this.cargarLista();
     if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor') {
       this.router.navigateByUrl('menu/(opt:ventas)');
@@ -36,6 +35,7 @@ export class EmpleadoComponent implements OnInit {
     this.empleadoService.listarEmpleado().subscribe((data: Empleado[]) => {
       this.lista = data;
       this.estado = true;
+      this.utilsService.cargarDataTable('#tablaEmpleado');
     });
   }
 

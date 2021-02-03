@@ -55,12 +55,7 @@ export class PerfilComponent implements OnInit {
     this.verActualizar();
   }
 
-  ngOnInit(): void {
-    if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor') {
-      this.router.navigateByUrl('menu/(opt:ventas)');
-    } else if (this.empleadoService.empleadolog.nombre_rol === 'Comprador') {
-      this.router.navigateByUrl('menu/(opt:listaCompras)');
-    }
+  ngOnInit(): void {    
   }
   ocultar(as: number) {
     if (as === 1) {
@@ -148,9 +143,9 @@ export class PerfilComponent implements OnInit {
       nom_user: ['', Validators.required,],
       ape_user: ['', Validators.required,],
       id_tip: [0, Validators.required,],
-      num_dni: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(8), Validators.maxLength(8)],],
+      num_dni: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]\d*)?$/), Validators.minLength(8), Validators.maxLength(8)],],
       direcc_user: ['', Validators.required],
-      telefono_user: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(9), Validators.maxLength(9)],],
+      telefono_user: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]\d*)?$/), Validators.minLength(9), Validators.maxLength(9)],],
       email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')]],
       id_rol: ['', Validators.required,]
 

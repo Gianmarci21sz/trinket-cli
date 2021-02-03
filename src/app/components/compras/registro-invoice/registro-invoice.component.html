@@ -14,10 +14,10 @@
             <form [formGroup]="nuevoInvoice"  class='row'>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="">ID Compra</label>
+                        <label for="">N° Orden Compra</label>
                         <select class="custom-select" formControlName="ord_comp_cab_id" #cpro (change)="compraProveedor(cpro.value)">
                             <option value="{{com.id_ord_comp_cab}}" *ngFor="let com of listaCompras">
-                                {{com.id_ord_comp_cab}}
+                                {{com.num_ord_cab}}
                             </option>
                         </select>
                         <small *ngIf="OrdenCompraCabId" class="text-danger">
@@ -25,8 +25,8 @@
                         </small>
                     </div> 
                     <div class="form-group">
-                        <label for="">N° Orden Compra</label>
-                        <input style="color: black;" type="text" disabled [class.is-invalid]="numOrdenCab" class="form-control" placeholder="" formControlName='num_orden_cab' >
+                        <label for="">ID Compra</label>
+                        <input style="color: black;" type="text" disabled [class.is-invalid]="numOrdenCab" class="form-control" placeholder="" formControlName='ord_comp_cab_id' >
                         <small *ngIf="numOrdenCab" class="text-danger">
                             Campo invalido
                           </small>
