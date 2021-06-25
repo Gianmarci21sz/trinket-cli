@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  uri : 'http://trinket-rest.herokuapp.com/'
+  uri : 'https://trinket-rest.herokuapp.com/'
 };
