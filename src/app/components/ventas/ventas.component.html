@@ -44,8 +44,8 @@
                             <td *ngIf="venta.est_vent_cab == 5">NO ENTREGADO</td>
                             <td *ngIf="venta.est_vent_cab == 4">ENTREGADO</td>
                             <td class="pl-0">
-                                <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'FACTURA'" target="_blank" href="http://192.168.1.13:8080/Trinket-Reporte/comprobanteController?accion=factura&codigoVenta={{venta.id_vent_cab}}" class="ml-4 btn btn-sm btn-outline-dark">Generar</a>
-                                <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'BOLETA'" target="_blank" href="http://192.168.1.13:8080/Trinket-Reporte/comprobanteController?accion=boleta&codigoVenta={{venta.id_vent_cab}}" class="ml-4 btn btn-sm btn-outline-dark">Generar</a>
+                                <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'FACTURA'" target="_blank" href="https://trinket-reporte.herokuapp.com/comprobanteController?accion=factura&codigoVenta={{venta.id_vent_cab}}" class="ml-4 btn btn-sm btn-outline-dark">Generar</a>
+                                <a *ngIf="venta.fecha_entr_cab!=null && venta.descrip_pag === 'BOLETA'" target="_blank" href="https://trinket-reporte.herokuapp.com/comprobanteController?accion=boleta&codigoVenta={{venta.id_vent_cab}}" class="ml-4 btn btn-sm btn-outline-dark">Generar</a>
                                 <button *ngIf="venta.fecha_entr_cab===null" class="ml-4 btn btn-sm btn-outline-dark" disabled>Generar</button>
                             </td>
                         </tr>
