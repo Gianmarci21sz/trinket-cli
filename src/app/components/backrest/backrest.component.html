@@ -4,7 +4,7 @@
             <button class="btn btn-outline-primary" (click)="agregar()" >Generar Backup</button>        
         </div>    
         <div class="col-12 col-lg-6 ml-0 ml-lg-5 p-0" style="overflow: scroll;max-height: 80vh;">
-            <h2 *ngIf="lista.length>0">Lista de Backup Generados</h2>
+            <h2 *ngIf="lista.length>0">Listado de Backup Generados</h2>
             <ul class="list-group">
                 <li *ngFor="let p of lista"  class="list-group-item list-group-item-action">                   
                     <h3>{{p.nombre}}</h3>                   
